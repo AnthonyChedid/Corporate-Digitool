@@ -67,6 +67,19 @@ services:
     networks:
       - app-network
 
+  pma:
+    image: phpmyadmin:5.1
+    environment:
+        - PMA_ARBITRARY=1
+        - PMA_HOST=db
+        - PMA_USER=laraveluser
+        - PMA_PASSWORD=password
+        - PMA_PORT="3306"
+    ports:
+        - 8888:80
+    networks:
+      - app-network  
+
 #Docker Networks
 networks:
   app-network:
