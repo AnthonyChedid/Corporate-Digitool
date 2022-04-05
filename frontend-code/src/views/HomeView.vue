@@ -1,13 +1,15 @@
 <template>
-  <div class="home">
-    
-  </div>
+  <hello-world />
 </template>
 
 <script>
-// @ is an alias to /src
+  import HelloWorld from '../components/HelloWorld'
 
-export default {
-  name: 'HomeView',
-}
+  export default {
+    name: 'Home',
+
+    components: {
+      HelloWorld,
+    },
+  }
 </script>
