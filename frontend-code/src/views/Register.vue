@@ -48,7 +48,9 @@
                            <div class="red--text"> {{errorMessage}}</div>
                            <v-btn type="submit" class="mt-4" color="primary" value="register">Register</v-btn>
                            <div class="grey--text mt-4" v-on:click="$router.push('/login')">
-                              <v-btn class="mt-4" color="primary" >Login</v-btn>
+                              <div class="grey--text mt-4">
+                              Already have an account ? <strong>Log in</strong>
+                           </div>
                            </div>
                       </form>
                      </v-card-text>

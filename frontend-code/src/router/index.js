@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
-import ToDos from '../components/ToDo.vue'
+//import ToDos from '../components/ToDo.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import store from '../store'
@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: ToDos,
+    component: HomeView,
     meta: {requiresAuth: true}
     
   }

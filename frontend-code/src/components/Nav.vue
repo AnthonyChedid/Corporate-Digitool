@@ -6,13 +6,12 @@
           <v-list-item-title class="text-h6">
             Corporate Digitool
           </v-list-item-title>
-           
         </v-list-item-content>
-        <button class="btn btn-danger" @click="logout">Logout</button>
+        
       </v-list-item>
-
+        
       <v-divider></v-divider>
-
+        
       <v-list
         dense
         nav
@@ -38,16 +37,15 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Corporate Digitool</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <profile-menu/>
+      
     </v-app-bar>
-
-    <v-main>
-      <router-view></router-view>
-    </v-main>
   </v-app>
 </template>
 
 <script>
-import axios from 'axios'
+import ProfileMenu from './ProfileMenu.vue'
   export default {
     data: () => ({ drawer: null ,
     
@@ -58,24 +56,11 @@ import axios from 'axios'
         right: null,
         
       }),
-
-    mounted(){
-      let BaseApi = axios.create({
-      baseURL: "http://localhost:8000/api"
-        });
-      let token=localStorage.getItem('token')
-      BaseApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    },  
     
     methods: {
-      logout(){
-          axios.post('http://localhost:8000/api/logout',{}).then((response) => {
-              localStorage.removeItem('token')
-              this.$router.push('/register')
-          }).catch((errors) => {
-              console.log(errors)
-          })
-      }
-    }  
+    },
+    components:{
+      ProfileMenu,
+    }
   }
 </script>
