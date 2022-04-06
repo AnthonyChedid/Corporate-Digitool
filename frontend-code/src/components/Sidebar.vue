@@ -36,7 +36,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Corporate Digitool</v-toolbar-title>
+      <navbar-title :message= message  />
       <v-spacer></v-spacer>
       <profile-menu/>
       
@@ -46,12 +46,13 @@
 
 <script>
 import ProfileMenu from './ProfileMenu.vue'
+import NavbarTitle from './NavbarTitle.vue'
   export default {
     data: () => ({ drawer: null ,
     
         items: [
           { title: 'My Challenges', icon: 'mdi-view-dashboard', to:'/' },
-          { title: 'Completed Challenges', icon: 'mdi-image' ,to:'/about'},
+          { title: 'Completed Challenges', icon: 'mdi-image' ,to:'/previouschallenges'},
         ],
         right: null,
         
@@ -61,6 +62,8 @@ import ProfileMenu from './ProfileMenu.vue'
     },
     components:{
       ProfileMenu,
-    }
+      NavbarTitle,
+    },
+    props:['message']
   }
 </script>

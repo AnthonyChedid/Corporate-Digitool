@@ -6,19 +6,18 @@
     >
     <new-challenge/>
     </v-container>
-    <sidebar message="My Challenges" />
+    <sidebar message="Previous Challenges" />
   </div>
 </template>
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
 import NewChallenge from '../components/NewChallenge.vue'
-  export default {
-    name: 'Home',
-
-    components: {
+export default {
+  name: 'PreviousChallenges',
+  components: {
       Sidebar,
       NewChallenge,
     },
-  }
+}
 </script>

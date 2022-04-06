@@ -7,7 +7,7 @@
             v-bind="attrs"
             v-on="on"
         >
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>mdi-account-circle</v-icon>
         </v-btn>
       </template>
       <v-list>
@@ -35,6 +35,9 @@
             if(message==="Log out"){
                 this.$store.dispatch('auth/logout');
                 this.$router.push('/login');
+            }
+            else{
+              this.$router.push('/profile');
             }
         }
     }

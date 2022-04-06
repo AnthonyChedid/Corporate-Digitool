@@ -1,9 +1,12 @@
 <template>
+   <div>
+   
    <v-app >
       <v-main>
          <v-container fluid fill-height>
             <v-layout align-center justify-center>
                <v-flex xs12 sm8 md4>
+                  <loading :load="setLoad"/>
                   <v-card class="elevation-12">
                      <v-toolbar dark color="primary">
                         <v-toolbar-title>Log in form</v-toolbar-title>
@@ -28,7 +31,7 @@
                               required
                            ></v-text-field>
                            <div class="red--text"> {{errorMessage}}</div>
-                           <v-btn type="submit" class="mt-4" color="primary" value="log in">Log in</v-btn>
+                           <v-btn :disabled="setLoad" type="submit" class="mt-4" color="primary" value="log in">Log in</v-btn>
                            <div class="grey--text mt-4" v-on:click="$router.push('/register')">
                               <div class="grey--text mt-4">
                               don't have an account ? <strong>Register</strong>
@@ -43,10 +46,12 @@
          </v-container>
       </v-main>
    </v-app>
+   </div>
 </template>
 
 <script>
 import User from '../models/user';
+import Loading from '../components/Loading.vue';
 export default {
   name: "login",
   data() {
@@ -59,6 +64,7 @@ export default {
          password_confirmation: ""
       },
       errorMessage: "",
+      setLoad:false,
     };
   },
   computed:{
@@ -73,11 +79,13 @@ export default {
   },
   methods: {
       handleLogin() {
+        this.setLoad=true
         if (this.user.email && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {this.$router.push('/').catch(() => {});},
             error => {
               if(error){
+                this.setLoad=false
                 this.errorMessage =
                 (error.response && error.response.data) ||
                 error.message ||
@@ -86,7 +94,11 @@ export default {
             }
           );
         }
+        
    }
 },
+   components:{
+      Loading,
+   }
 };
 </script>
