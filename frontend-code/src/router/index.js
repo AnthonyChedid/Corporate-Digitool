@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PreviousChallenges from '../views/PreviousChallengesView.vue'
 //import ToDos from '../components/ToDo.vue'
+import { createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import store from '../store'
@@ -45,6 +46,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

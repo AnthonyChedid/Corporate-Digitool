@@ -5,6 +5,7 @@
       fluid
     >
     <new-challenge/>
+    <iframe src="https://onedrive.live.com/embed?cid=27E643F3366B3776&resid=27E643F3366B3776%211677&authkey=AKqK-DJHYryg0Xw&em=2" width="1000" height="1000" frameborder="0" scrolling="no"></iframe>
     </v-container>
     <sidebar message="Previous Challenges" />
   </div>
