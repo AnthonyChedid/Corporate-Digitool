@@ -8,6 +8,11 @@ use App\Http\Controllers\AuthController;
 
 
 
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\CompetenceController;
+// use App\Http\Controllers\UserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,6 +23,10 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::prefix('/teams')->group(__DIR__.'/api/teamRoutes.php');
+Route::prefix('/competences')->group(__DIR__.'/api/competenceRoutes.php');
+// Route::prefix('/users')->group(__DIR__.'/api/userRoutes.php');
 
 //Auth
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
