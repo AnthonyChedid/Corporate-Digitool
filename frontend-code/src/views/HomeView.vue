@@ -1,25 +1,30 @@
 <template>
   <div>
     <v-container
-      class="spacing-playground pa-6 d-flex align-center"
-      fluid
+      class="pa-6 d-flex "
     >
+    
     <div v-for="challenge in challenges" :key="challenge.id">
-      <challenge-card :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a edscriptuon"/>
+      <new-challenge-card @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a descriptuon" buttonText="Start Challenge">
+        
+      </new-challenge-card>
     </div>
     </v-container>
     <sidebar message="My Challenges" />
+    <challenge-dialog @clicked="onClickCard()" :dialog="toggleDialog"/>
   </div>
 </template>
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
-import ChallengeCard from '../components/ChallengeCard.vue'
+import NewChallengeCard from '../components/NewChallengeCard.vue'
+import ChallengeDialog from '../components/ChallengeDialog.vue'
   export default {
     name: 'Home',
     data() {
     return {
-      challenges:[]
+      challenges:[],
+      toggleDialog:false,
     };
   },
 
@@ -31,9 +36,24 @@ import ChallengeCard from '../components/ChallengeCard.vue'
       
     },
 
+    methods:{
+      onClickCard(value){
+         this.toggleDialog=!this.toggleDialog
+         console.log("toggle "+this.toggleDialog);
+      }
+    },
+
     components: {
       Sidebar,
-      ChallengeCard
+      NewChallengeCard,
+      ChallengeDialog
     },
   }
 </script>
+
+<style scoped>
+div{
+  float: left;
+  border: 1px solid red;
+}
+</style>

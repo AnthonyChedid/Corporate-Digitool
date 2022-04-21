@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 const token = JSON.parse(localStorage.getItem('token'));
 const initialState = {
     newChallenges:[],
-    oldChallenges:[]
+    previousChallenges:[]
 }
 
   export const challenges = {
@@ -17,13 +17,19 @@ const initialState = {
     actions: {
       getNewChallenges({ commit },id) {
         UserService.getNewChallenges(id).then(res=>commit('getNewChallengesSuccess', res))
-        
-       },
+      },
+      getPreviousChallenges({ commit },id) {
+        UserService.getPreviousChallenges(id).then(res=>commit('getPreviousChallengesSuccess', res))
+      },
     },
     mutations: {
       getNewChallengesSuccess(state, challenges) {
         console.log(challenges+"mutations");
         state.newChallenges = challenges;
+      },
+      getPreviousChallengesSuccess(state, challenges) {
+        console.log(challenges+"mutations");
+        state.previousChallenges = challenges;
       }
     }
   };

@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-card
     class="mx-auto"
     max-width="344"
@@ -27,17 +28,35 @@
         outlined
         rounded
         text
+        @click="onClickButton()"
       >
-        Start
+        {{buttonText}}
       </v-btn>
     </v-card-actions>
+    
   </v-card>
+  </div>
 </template>
 
 <script>
+import ChallengeDialog from '../components/ChallengeDialog.vue'
 export default {
-  props:['name','type','description']
+  data () {
+        return {
+          toggleDialog:false,
+        }
+      },
+  props:['name','type','description','buttonText'],
+  methods:{
+    onClickButton (event) {
+         this.$emit('clicked');
+     }
+  },
+  components:{
+    ChallengeDialog,
+  }
 }
+
 </script>
 
 <style>

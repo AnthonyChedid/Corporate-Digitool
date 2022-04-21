@@ -16,7 +16,24 @@ class AssignedChallengeController extends Controller
     public function getNewChallenges(Request $request)
     {
         $id = $request->id;
-        $a=AssignedChallenge::where('user_id',$id)->get();
+        $a=AssignedChallenge::where('user_id',$id)->where('isFinished',false)->get();
+        for ($x = 0; $x <count($a); $x++) {
+            $id=$a[$x]->challenge_id;
+            $challenge=Challenge::where('id',$id)->get();
+            $a[$x]->challenge_id=$challenge;
+        }
+        return $a;
+    }
+
+    /**
+     * get asssigned challenges for userid
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getPreviousChallenges(Request $request)
+    {
+        $id = $request->id;
+        $a=AssignedChallenge::where('user_id',$id)->where('isFinished',true)->get();
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->challenge_id;
             $challenge=Challenge::where('id',$id)->get();

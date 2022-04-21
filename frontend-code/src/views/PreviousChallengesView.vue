@@ -4,8 +4,10 @@
       class="spacing-playground pa-6 d-flex align-center"
       fluid
     >
+    <div v-for="challenge in challenges" :key="challenge.id">
+      <new-challenge-card :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a edscriptuon" buttonText="View results"/>
+    </div>
     
-    <iframe src="https://onedrive.live.com/embed?cid=27E643F3366B3776&resid=27E643F3366B3776%211677&authkey=AKqK-DJHYryg0Xw&em=2" width="1000" height="1000" frameborder="0" scrolling="no"></iframe>
     </v-container>
     <sidebar message="Previous Challenges" />
   </div>
@@ -13,12 +15,24 @@
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
-//import NewChallenge from '../components/ChallengeCard.vue'
+import NewChallengeCard from '../components/NewChallengeCard.vue'
 export default {
   name: 'PreviousChallenges',
+  data() {
+    return {
+      challenges:[]
+    };
+  },
+      created: function () {
+        this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id).then(
+                ()=>{this.challenges=this.$store.state.challenges.previousChallenges},
+                error=>{console.log("error: "+error)}
+              ); 
+      
+    },
   components: {
       Sidebar,
-  //    NewChallenge,
+      NewChallengeCard
     },
 }
 </script>
