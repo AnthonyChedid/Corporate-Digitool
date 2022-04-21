@@ -83,10 +83,7 @@ export default {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
                this.$router.push('/').catch(() => {});
-               this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id).then(
-                  ()=>{console.log(JSON.parse(localStorage.getItem('user')).id)},
-                  error=>{console.log("error: "+error)}
-               ); 
+               
             },
             error => {
               if(error){
