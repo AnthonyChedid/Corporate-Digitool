@@ -1,6 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header'
-const API_URL = 'http://localhost:8080/api/';
+const API_URL = 'http://localhost:8000/api/';
 
 class AuthService {
   login(user) {
@@ -22,7 +22,7 @@ class AuthService {
     console.log("logout token : "+token);
     const config = {
       "Content-type": "application/json",
-      headers: { "Authorization": `Bearer ${token}` }
+      headers: authHeader()
     };
   
     axios.post( 

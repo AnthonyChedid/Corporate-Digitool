@@ -7,12 +7,12 @@
     <v-list-item three-line>
       <v-list-item-content>
         <div class="text-overline mb-4">
-          OVERLINE
+          {{name}}
         </div>
         <v-list-item-title class="text-h5 mb-1">
-          Headline 5
+          {{type}}
         </v-list-item-title>
-        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+        <v-list-item-subtitle>{{description}}</v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-avatar
@@ -28,7 +28,7 @@
         rounded
         text
       >
-        Button
+        Start
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-
+  props:['name','type','description']
 }
 </script>
 

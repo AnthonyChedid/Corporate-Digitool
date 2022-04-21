@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->foreign('challenge_id')->references('id')->on('challenges');
             $table->string('taskName');
             $table->string('description');
-            $table->integer('result');
+            $table->string('result');
             $table->timestamps();
         });
     }

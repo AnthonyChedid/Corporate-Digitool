@@ -7,7 +7,6 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 
 
-
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\CompetenceController;
 // use App\Http\Controllers\UserController;
@@ -23,7 +22,6 @@ use App\Http\Controllers\CompetenceController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::prefix('/teams')->group(__DIR__.'/api/teamRoutes.php');
 Route::prefix('/competences')->group(__DIR__.'/api/competenceRoutes.php');
 // Route::prefix('/users')->group(__DIR__.'/api/userRoutes.php');
@@ -34,8 +32,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
-
 Route::post('register', 'App\Http\Controllers\AuthController@register');
 Route::post('login', 'App\Http\Controllers\AuthController@login');
 Route::post('logout', 'App\Http\Controllers\AuthController@logout')->middleware('auth:sanctum');
+
+Route::get('/getnewchallenges/{id}','App\Http\Controllers\AssignedChallengeController@getNewChallenges')->middleware('auth:sanctum');

@@ -1,19 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\AssignedChallenge;
+use App\Models\Challenge;
 
 use Illuminate\Http\Request;
 
 class AssignedChallengeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * get asssigned challenges for userid
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getNewChallenges(Request $request)
     {
-        //
+        $id = $request->id;
+        $a=AssignedChallenge::where('user_id',$id)->get();
+        for ($x = 0; $x <count($a); $x++) {
+            $id=$a[$x]->challenge_id;
+            $challenge=Challenge::where('id',$id)->get();
+            $a[$x]->challenge_id=$challenge;
+        }
+        return $a;
     }
 
     /**

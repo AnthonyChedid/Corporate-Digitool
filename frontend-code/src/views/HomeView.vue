@@ -4,7 +4,6 @@
       class="spacing-playground pa-6 d-flex align-center"
       fluid
     >
-    <new-challenge/>
     </v-container>
     <sidebar message="My Challenges" />
   </div>
@@ -12,13 +11,20 @@
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
-import NewChallenge from '../components/NewChallenge.vue'
   export default {
     name: 'Home',
+    data() {
+    return {
+      challenges:[]
+    };
+  },
+
+    created: function () {
+      this.challenges=this.$store.state.myValue
+    },
 
     components: {
       Sidebar,
-      NewChallenge,
     },
   }
 </script>

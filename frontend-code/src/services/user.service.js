@@ -1,10 +1,18 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-const API_URL = 'http://localhost:8080/api/';
+const API_URL = 'http://localhost:8000/api/';
 class UserService {
-//   getPrivateContent() {
-//     return axios.get(API_URL + 'user', { headers: authHeader() });
-//   }
+  async getNewChallenges(id) {
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // let token=localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1)
+    const config = {
+      "Content-type": "application/json",
+      responseType: 'json',
+      headers: authHeader(),
+    };
+    const res =  await axios.get(API_URL + 'getnewchallenges/'+id,config);
+    return res.data
+  }
   
 }
 export default new UserService();
