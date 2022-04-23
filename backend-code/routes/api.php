@@ -38,3 +38,4 @@ Route::post('logout', 'App\Http\Controllers\AuthController@logout')->middleware(
 
 Route::get('/getnewchallenges/{id}','App\Http\Controllers\AssignedChallengeController@getNewChallenges')->middleware('auth:sanctum');
 Route::get('/getpreviouschallenges/{id}','App\Http\Controllers\AssignedChallengeController@getPreviousChallenges')->middleware('auth:sanctum');
+Route::get('/gettasks/{id}','App\Http\Controllers\AssignedTaskController@getTasks')->middleware('auth:sanctum');

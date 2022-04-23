@@ -2,16 +2,15 @@
   <div>
     <v-container
       class="pa-6 d-flex "
-    >
-    
+    >  
     <div v-for="challenge in challenges" :key="challenge.id">
-      <new-challenge-card @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a descriptuon" buttonText="Start Challenge">
-        
+      <new-challenge-card :challenge_id="challenge.id" @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a descriptuon" buttonText="Start Challenge" >
       </new-challenge-card>
     </div>
     </v-container>
     <sidebar message="My Challenges" />
-    <challenge-dialog @clicked="onClickCard()" :dialog="toggleDialog"/>
+    <challenge-dialog @clicked="onClickCard()" :dialog="toggleDialog" />
+    
   </div>
 </template>
 
@@ -25,6 +24,7 @@ import ChallengeDialog from '../components/ChallengeDialog.vue'
     return {
       challenges:[],
       toggleDialog:false,
+      tasks:[]
     };
   },
 
@@ -38,8 +38,9 @@ import ChallengeDialog from '../components/ChallengeDialog.vue'
 
     methods:{
       onClickCard(value){
-         this.toggleDialog=!this.toggleDialog
-         console.log("toggle "+this.toggleDialog);
+        this.toggleDialog=!this.toggleDialog
+        this.tasks=this.$store.state.challenges.tasks
+        console.log(this.tasks)
       }
     },
 
@@ -52,8 +53,5 @@ import ChallengeDialog from '../components/ChallengeDialog.vue'
 </script>
 
 <style scoped>
-div{
-  float: left;
-  border: 1px solid red;
-}
+
 </style>

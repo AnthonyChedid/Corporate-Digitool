@@ -19,15 +19,17 @@
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Settings</v-toolbar-title>
+          <v-tabs v-model="tab">
+            <v-tab v-for="task in this.$store.state.challenges.tasks" :key="task.id">{{task.task_id[0].taskName}}</v-tab>
+          </v-tabs>
+            
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
               dark
-              text
-              
+              text 
             >
-              Save
+              Submit
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
@@ -35,54 +37,24 @@
           three-line
           subheader
         >
-          <v-subheader>User Controls</v-subheader>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title>Content filtering</v-list-item-title>
-              <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
+             <v-tabs-items v-model="tab">
+                <v-tab-item
+                  v-for="task in this.$store.state.challenges.tasks"
+                  :key="task.id"
+                >
+                  <v-card flat>
+                    <v-card-text> {{task.task_id[0].description}}</v-card-text>
+                  </v-card>
+                </v-tab-item>
+              </v-tabs-items>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>Password</v-list-item-title>
-              <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+          
         </v-list>
         <v-divider></v-divider>
-        <v-list
-          three-line
-          subheader
-        >
-          <v-subheader>General</v-subheader>
-          <v-list-item>
-            <v-list-item-action>
-              <v-checkbox v-model="notifications"></v-checkbox>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Notifications</v-list-item-title>
-              <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-action>
-              <v-checkbox v-model="sound"></v-checkbox>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Sound</v-list-item-title>
-              <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-action>
-              <v-checkbox v-model="widgets"></v-checkbox>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Auto-add widgets</v-list-item-title>
-              <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+        
       </v-card>
     </v-dialog>
   </v-row>
@@ -92,7 +64,7 @@
   export default {
     data () {
       return {
-        
+        tab: null,
         notifications: false,
         sound: true,
         widgets: false,
@@ -103,7 +75,8 @@
             this.$emit('clicked');
             }
         },
+        
 
-    props:['dialog']
+    props:['dialog','challenge_id','tasks'],
   }
 </script>

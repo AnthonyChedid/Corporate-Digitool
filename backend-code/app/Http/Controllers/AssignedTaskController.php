@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AssignedTask;
+use App\Models\Task;
 
 class AssignedTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getTasks(Request $request)
     {
-        //
+        $id = $request->id;
+        $a=AssignedTask::where('assignedchallenge_id',$id)->get();
+        for ($x = 0; $x <count($a); $x++) {
+            $id=$a[$x]->task_id;
+            $challenge=Task::where('id',$id)->get();
+            $a[$x]->task_id=$challenge;
+        }
+        return $a;
     }
 
     /**

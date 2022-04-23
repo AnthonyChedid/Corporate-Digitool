@@ -8,10 +8,10 @@
     <v-list-item three-line>
       <v-list-item-content>
         <div class="text-overline mb-4">
-          {{name}}
+          Name: {{name}}
         </div>
         <v-list-item-title class="text-h5 mb-1">
-          {{type}}
+          Type: {{type}}
         </v-list-item-title>
         <v-list-item-subtitle>{{description}}</v-list-item-subtitle>
       </v-list-item-content>
@@ -44,17 +44,39 @@ export default {
   data () {
         return {
           toggleDialog:false,
+          chall_id:0,
         }
       },
-  props:['name','type','description','buttonText'],
+  props:['name','type','description','buttonText','challenge_id'],
+  watch: {
+    challenge_id: function(newVal) { 
+        this.chall_id = newVal
+    }
+  },
+  
   methods:{
     onClickButton (event) {
-         this.$emit('clicked');
+         
+         this.$store.dispatch('challenges/getTasks', this.challenge_id).then(
+            () => {
+              this.$emit('clicked');
+            },
+            error => {
+              if(error){
+                this.setLoad=false
+                this.errorMessage =
+                (error.response && error.response.data) ||
+                error.message ||
+                error.toString();
+               }
+            }
+          );
+          
      }
   },
   components:{
     ChallengeDialog,
-  }
+  },
 }
 
 </script>
