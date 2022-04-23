@@ -40,14 +40,12 @@
           <v-list-item>
             <v-list-item-content>
              <v-tabs-items v-model="tab">
-                <v-tab-item
+                <task-card
                   v-for="task in this.$store.state.challenges.tasks"
                   :key="task.id"
+                  :description="task.task_id[0].description"
                 >
-                  <v-card flat>
-                    <v-card-text> {{task.task_id[0].description}}</v-card-text>
-                  </v-card>
-                </v-tab-item>
+                </task-card>
               </v-tabs-items>
             </v-list-item-content>
           </v-list-item>
@@ -61,6 +59,7 @@
 </template>
 
 <script>
+  import TaskCard from './TaskCard.vue'
   export default {
     data () {
       return {
@@ -78,5 +77,9 @@
         
 
     props:['dialog','challenge_id','tasks'],
+
+    components:{
+      TaskCard,
+    }
   }
 </script>
