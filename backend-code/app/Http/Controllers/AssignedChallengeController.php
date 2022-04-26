@@ -6,7 +6,7 @@ use App\Models\Challenge;
 
 use Illuminate\Http\Request;
 
-class AssignedChallengeController extends Controller
+class AssignedChallengeController extends TCG\Voyager\Http\Controllers\VoyagerBaseController
 {
     /**
      * get asssigned challenges for userid
@@ -107,4 +107,8 @@ class AssignedChallengeController extends Controller
     {
         //
     }
+
+    public function assignUserToChallenge(Request $request){
+
+        }
 }
