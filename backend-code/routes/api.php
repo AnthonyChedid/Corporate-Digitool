@@ -42,3 +42,4 @@ Route::patch('/challengefinished/{id}','App\Http\Controllers\AssignedChallengeCo
 
 Route::get('/gettasks/{id}','App\Http\Controllers\AssignedTaskController@getTasks')->middleware('auth:sanctum');
 Route::patch('task','App\Http\Controllers\AssignedTaskController@answerTask')->middleware('auth:sanctum');
+Route::get('/getresulttasks/{id}','App\Http\Controllers\AssignedTaskController@getResultTasks')->middleware('auth:sanctum');
