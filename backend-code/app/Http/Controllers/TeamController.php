@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Team;
 
-class TeamController extends Controller
+class TeamController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -40,7 +40,7 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-       return Team::find($id); 
+       return Team::find($id);
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Competence;
 
-class CompetenceController extends Controller
+class CompetenceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -40,7 +40,7 @@ class CompetenceController extends Controller
      */
     public function show($id)
     {
-        return Competence::find($id); 
+        return Competence::find($id);
     }
 
     /**
