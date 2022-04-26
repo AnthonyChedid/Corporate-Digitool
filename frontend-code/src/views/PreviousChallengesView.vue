@@ -5,22 +5,26 @@
       fluid
     >
     <div v-for="challenge in challenges" :key="challenge.id">
-      <new-challenge-card :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a edscriptuon" buttonText="View results"/>
+      <result-challenge-card :challenge_id="challenge.id" @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a edscriptuon"/>
+      
     </div>
     
     </v-container>
     <sidebar message="Previous Challenges" />
+    <result-dialog @clicked="onClickCard()" :dialog="toggleDialog"/>
   </div>
 </template>
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
-import NewChallengeCard from '../components/NewChallengeCard.vue'
+import ResultDialog from '../components/ResultDialog.vue'
+import ResultChallengeCard from '../components/ResultChallengeCard.vue'
 export default {
   name: 'PreviousChallenges',
   data() {
     return {
-      challenges:[]
+      challenges:[],
+      toggleDialog:false,
     };
   },
       created: function () {
@@ -30,9 +34,18 @@ export default {
               ); 
       
     },
+
+    methods:{
+      onClickCard(value){
+        this.toggleDialog=!this.toggleDialog
+        this.tasks=this.$store.state.challenges.tasks
+        console.log(this.tasks)
+      }
+    },
   components: {
       Sidebar,
-      NewChallengeCard
+      ResultDialog,
+      ResultChallengeCard
     },
 }
 </script>

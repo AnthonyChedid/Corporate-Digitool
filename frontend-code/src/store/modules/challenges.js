@@ -5,6 +5,7 @@ const initialState = {
     newChallenges:[],
     previousChallenges:[],
     tasks:[],
+    resultTasks:[]
   }
 
   export const challenges = {
@@ -32,6 +33,9 @@ const initialState = {
       finishChallenge({ commit },id) {
         UserService.finishChallenge(id)
       },
+      resultTasks({commit},id){
+        UserService.getResultTasks(id).then(res=>commit('getResultTasksSuccess', res))
+      }
     },
     mutations: {
       getNewChallengesSuccess(state, challenges) {
@@ -43,5 +47,9 @@ const initialState = {
       getTasksSuccess(state, tasks) {
         state.tasks = tasks;
       },
+
+      getResultTasksSuccess(state,tasks){
+        state.resultTasks=tasks;
+      }
     }
   };

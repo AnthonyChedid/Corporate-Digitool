@@ -54,6 +54,17 @@ class UserService {
     };
     await axios.patch(API_URL +'challengefinished/'+id,{},config);
   }
+
+  async getResultTasks(id){
+    const config = {
+      "Content-type": "application/json",
+      responseType: 'json',
+      headers: authHeader(),
+    };
+
+    const res = await axios.get(API_URL +'getresulttasks/'+id,config);
+    return res.data
+  }
   
 }
 export default new UserService();

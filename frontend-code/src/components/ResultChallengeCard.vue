@@ -30,7 +30,7 @@
         text
         @click="onClickButton()"
       >
-        {{buttonText}}
+        View Results
       </v-btn>
     </v-card-actions>
     
@@ -56,8 +56,7 @@ export default {
   
   methods:{
     onClickButton (event) {
-         if(this.buttontext == "Start Challenge"){
-          this.$store.dispatch('challenges/getTasks', this.challenge_id).then(
+        this.$store.dispatch('challenges/resultTasks', this.challenge_id).then(
               () => {
                 this.$emit('clicked');
               },
@@ -71,11 +70,7 @@ export default {
                 }
               }
             );
-         }else{
-           this.$store.dispatch('challenges/getResultTasks', this.challenge_id)
          }
-          
-     }
   },
   components:{
     ChallengeDialog,
