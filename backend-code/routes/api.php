@@ -38,4 +38,7 @@ Route::post('logout', 'App\Http\Controllers\AuthController@logout')->middleware(
 
 Route::get('/getnewchallenges/{id}','App\Http\Controllers\AssignedChallengeController@getNewChallenges')->middleware('auth:sanctum');
 Route::get('/getpreviouschallenges/{id}','App\Http\Controllers\AssignedChallengeController@getPreviousChallenges')->middleware('auth:sanctum');
+Route::patch('/challengefinished/{id}','App\Http\Controllers\AssignedChallengeController@finishChallenge')->middleware('auth:sanctum');
+
 Route::get('/gettasks/{id}','App\Http\Controllers\AssignedTaskController@getTasks')->middleware('auth:sanctum');
+Route::patch('task','App\Http\Controllers\AssignedTaskController@answerTask')->middleware('auth:sanctum');

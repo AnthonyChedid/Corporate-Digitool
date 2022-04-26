@@ -3,13 +3,14 @@
     <v-container
       class="pa-6 d-flex "
     >  
-    <div v-for="challenge in challenges" :key="challenge.id">
+    <div v-for="challenge in this.$store.state.challenges.newChallenges" :key="challenge.id">
       <new-challenge-card :challenge_id="challenge.id" @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a descriptuon" buttonText="Start Challenge" >
       </new-challenge-card>
+      <challenge-dialog :challenge_id="challenge.id" @clicked="onClickCard()" :dialog="toggleDialog" />
     </div>
     </v-container>
     <sidebar message="My Challenges" />
-    <challenge-dialog @clicked="onClickCard()" :dialog="toggleDialog" />
+    
     
   </div>
 </template>

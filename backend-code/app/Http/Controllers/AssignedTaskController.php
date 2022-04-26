@@ -51,12 +51,16 @@ class AssignedTaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function answerTask(Request $request)
     {
-        //
+        $id=$request->id;
+        $score= $request->score;
+        $time= $request->time;
+
+        return AssignedTask::where('id',$id)
+                    ->update(['task_score' => $score,'completionTime' => $time]);
     }
 
     /**

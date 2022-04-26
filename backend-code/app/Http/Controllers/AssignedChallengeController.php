@@ -30,6 +30,26 @@ class AssignedChallengeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function getOldChallenges(Request $request)
+    {
+        $id = $request->id;
+        $a=AssignedChallenge::where('user_id',$id)->where('isFinished',true)->get();
+        for ($x = 0; $x <count($a); $x++) {
+            $id=$a[$x]->challenge_id;
+            $challenge=Challenge::where('id',$id)->get();
+            $a[$x]->challenge_id=$challenge;
+        }
+        return $a;
+    }
+
+
+
+
+    /**
+     * get asssigned challenges for userid
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getPreviousChallenges(Request $request)
     {
         $id = $request->id;
@@ -68,12 +88,13 @@ class AssignedChallengeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function finishChallenge(Request $request)
     {
-        //
+        $id = $request->id;
+        AssignedChallenge::where('id',$id)->update(['isFinished' => true]);
+
     }
 
     /**

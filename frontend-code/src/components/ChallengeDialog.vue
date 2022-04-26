@@ -12,13 +12,13 @@
           dark
           color="primary"
         >
-          <v-btn
+          <!-- <v-btn
             icon
             dark
             @click="onClickButton()"
           >
             <v-icon>mdi-close</v-icon>
-          </v-btn>
+          </v-btn> -->
           <v-tabs v-model="tab">
             <v-tab v-for="task in this.$store.state.challenges.tasks" :key="task.id">{{task.task_id[0].taskName}}</v-tab>
           </v-tabs>
@@ -27,9 +27,10 @@
           <v-toolbar-items>
             <v-btn
               dark
-              text 
+              text
+              @click="onFinishButton()" 
             >
-              Submit
+              FINISH CHALLENGE
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
@@ -44,6 +45,8 @@
                   v-for="task in this.$store.state.challenges.tasks"
                   :key="task.id"
                   :description="task.task_id[0].description"
+                  :id="task.id"
+                  :correctAnswer="task.task_id[0].result"
                 >
                 </task-card>
               </v-tabs-items>
@@ -54,6 +57,7 @@
         <v-divider></v-divider>
         
       </v-card>
+ 
     </v-dialog>
   </v-row>
 </template>
@@ -72,9 +76,18 @@
     methods:{
         onClickButton (event) {
             this.$emit('clicked');
-            }
         },
+
+        onFinishButton(){
+          this.$store.dispatch('challenges/finishChallenge',this.challenge_id).then(()=>{
+            this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id)
+            this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id)
+            this.$emit('clicked');
+          })
+        }
         
+    },
+      
 
     props:['dialog','challenge_id','tasks'],
 

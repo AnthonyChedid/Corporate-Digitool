@@ -26,6 +26,12 @@ const initialState = {
       getTasks({ commit },id) {
         UserService.getTasks(id).then(res=>commit('getTasksSuccess', res))
       },
+      answerTask({ commit },body) {
+        UserService.answerTask(body)
+      },
+      finishChallenge({ commit },id) {
+        UserService.finishChallenge(id)
+      },
     },
     mutations: {
       getNewChallengesSuccess(state, challenges) {
