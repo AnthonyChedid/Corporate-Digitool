@@ -56,7 +56,6 @@ export default {
   
   methods:{
     onClickButton (event) {
-         if(this.buttontext == "Start Challenge"){
           this.$store.dispatch('challenges/getTasks', this.challenge_id).then(
               () => {
                 this.$emit('clicked');
@@ -71,10 +70,6 @@ export default {
                 }
               }
             );
-         }else{
-           this.$store.dispatch('challenges/getResultTasks', this.challenge_id)
-         }
-          
      }
   },
   components:{

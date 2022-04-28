@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\AssignedChallenge;
 use App\Models\Challenge;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use Illuminate\Http\Request;
 
-class AssignedChallengeController extends TCG\Voyager\Http\Controllers\VoyagerBaseController
+class AssignedChallengeController extends VoyagerBaseController
 {
     /**
      * get asssigned challenges for userid
@@ -62,27 +63,6 @@ class AssignedChallengeController extends TCG\Voyager\Http\Controllers\VoyagerBa
         return $a;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -97,16 +77,6 @@ class AssignedChallengeController extends TCG\Voyager\Http\Controllers\VoyagerBa
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function assignUserToChallenge(Request $request){
 

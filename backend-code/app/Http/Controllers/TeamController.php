@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Team;
-
-class TeamController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
+class TeamController extends VoyagerBaseController
 {
     /**
      * Display a listing of the resource.

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
-
-class TaskController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
+class TaskController extends VoyagerBaseController
 {
     public function showTasksOfChallenge($challengeId)
         {

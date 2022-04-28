@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Competence;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
-class CompetenceController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
+class CompetenceController extends VoyagerBaseController
 {
     /**
      * Display a listing of the resource.

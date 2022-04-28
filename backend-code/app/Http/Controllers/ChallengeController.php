@@ -16,10 +16,11 @@ use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Events\BreadImagesDeleted;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use App\Models\User;
 
-class ChallengeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
+class ChallengeController extends VoyagerBaseController
 {
     public function index(Request $request)
         {
