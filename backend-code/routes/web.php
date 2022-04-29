@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\AssignedChallengeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +23,11 @@ Route::get('/api/1', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::get('/tasks/view/{id}', 'App\Http\Controllers\TaskController@showTasksOfChallenge');
+    Route::post('/tasks/create/{id}', 'App\Http\Controllers\TaskController@addTaskToChallenge');
+
+    Route::post('/challenges/assignAChallenge', 'App\Http\Controllers\AssignedChallengeController@assignUserToChallenge');
+
+
 });
