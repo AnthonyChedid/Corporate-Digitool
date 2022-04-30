@@ -82,7 +82,7 @@
           this.$store.dispatch('challenges/finishChallenge',this.challenge_id).then(()=>{
             this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id)
             this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id)
-            this.$emit('clicked');
+            this.$emit('finishedChallenge');
           })
         }
         

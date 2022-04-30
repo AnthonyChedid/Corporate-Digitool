@@ -41,6 +41,7 @@
                   :id="task.id"
                   :score="task.task_score"
                   :competence="task.competence_id[0].competenceName"
+                  :time="task.completionTime"
                 >
                 </result-card>
               </v-tabs-items>

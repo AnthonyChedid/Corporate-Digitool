@@ -6,7 +6,7 @@ class UserService {
     // let user = JSON.parse(localStorage.getItem('user'));
     // let token=localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1)
     const config = {
-      "Content-type": "application/json",
+      'Content-Type': 'multipart/form-data',
       responseType: 'json',
       headers: authHeader(),
     };

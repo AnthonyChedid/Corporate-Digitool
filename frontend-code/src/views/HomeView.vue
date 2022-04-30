@@ -4,9 +4,10 @@
       class="pa-6 d-flex "
     >  
     <div v-for="challenge in this.$store.state.challenges.newChallenges" :key="challenge.id">
-      <new-challenge-card :challenge_id="challenge.id" @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a descriptuon" buttonText="Start Challenge" >
+      <new-challenge-card :file="challenge.challenge_id[0].challenge_document" :challenge_id="challenge.id" @clicked="challengeId=challenge.id;onClickCard();" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].challenge_type_id.typeName" description="a descriptuon" buttonText="Start Challenge" >
       </new-challenge-card>
-      <challenge-dialog :challenge_id="challenge.id" @clicked="onClickCard()" :dialog="toggleDialog" />
+      <br/>
+      <challenge-dialog :challenge_id="challenge.id" @finishedChallenge="onFinishChallenge()" @clicked="onClickCard()" :dialog="toggleDialog" />
     </div>
     </v-container>
     <sidebar message="My Challenges" />
@@ -25,7 +26,8 @@ import ChallengeDialog from '../components/ChallengeDialog.vue'
     return {
       challenges:[],
       toggleDialog:false,
-      tasks:[]
+      tasks:[],
+      challengeId:null,
     };
   },
 
@@ -39,9 +41,14 @@ import ChallengeDialog from '../components/ChallengeDialog.vue'
 
     methods:{
       onClickCard(value){
+        this.$store.dispatch('challenges/finishChallenge',this.challengeId)
         this.toggleDialog=!this.toggleDialog
         this.tasks=this.$store.state.challenges.tasks
-        console.log(this.tasks)
+      },
+      onFinishChallenge(){
+        this.toggleDialog=!this.toggleDialog
+        this.tasks=this.$store.state.challenges.tasks
+        
       }
     },
 

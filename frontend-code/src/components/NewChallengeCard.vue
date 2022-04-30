@@ -30,7 +30,7 @@
         text
         @click="onClickButton()"
       >
-        {{buttonText}}
+      {{buttonText}}
       </v-btn>
     </v-card-actions>
     
@@ -47,7 +47,7 @@ export default {
           chall_id:0,
         }
       },
-  props:['name','type','description','buttonText','challenge_id'],
+  props:['name','type','description','buttonText','challenge_id','file'],
   watch: {
     challenge_id: function(newVal) { 
         this.chall_id = newVal
@@ -59,6 +59,11 @@ export default {
           this.$store.dispatch('challenges/getTasks', this.challenge_id).then(
               () => {
                 this.$emit('clicked');
+                var a = document.createElement("a"); //Create <a>
+               // a.href = "data:image/png;base64," + this.file; //Image Base64 Goes here
+                a.href = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + this.file;
+                a.download = "Image.xlsx"; //File name Here
+                a.click(); //Downloaded file
               },
               error => {
                 if(error){
