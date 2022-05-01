@@ -8,4 +8,5 @@ use TCG\Voyager\Models\User;
 class team_user extends User
 {
     use HasFactory;
+    protected $fillable =['user_id','team_id'];
 }

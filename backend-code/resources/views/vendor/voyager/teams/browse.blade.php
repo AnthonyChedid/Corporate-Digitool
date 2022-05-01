@@ -12,12 +12,6 @@
                 <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
             </a>
         @endcan
-
-        @can('add', app($dataType->model_name))
-            <button id="add_team_member">Add team member</button>
-
-        @endcan
-
         @can('delete', app($dataType->model_name))
             @include('voyager::partials.bulk-delete')
         @endcan
@@ -33,6 +27,9 @@
                 <input type="checkbox" @if ($showSoftDeleted) checked @endif id="show_soft_deletes" data-toggle="toggle" data-on="{{ __('voyager::bread.soft_deletes_off') }}" data-off="{{ __('voyager::bread.soft_deletes_on') }}">
             @endif
         @endcan
+
+        <button id="add_team_member_button"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Add a team member</button>
+
         @foreach($actions as $action)
             @if (method_exists($action, 'massAction'))
                 @include('voyager::bread.partials.actions', ['action' => $action, 'data' => null])
@@ -48,37 +45,6 @@
         <div class="row">
             <div class="col-md-12">
 
-               <div class="modal fade modal-info" id="add_member_modal">
-                       <div class="modal-dialog">
-                           <div class="modal-content">
-
-                               <div class="modal-header">
-                                   <button type="button" class="close" data-dismiss="modal"
-                                           aria-hidden="true">&times;</button>
-                                   <h4 class="modal-title"><i class="voyager-warning"></i> Add a team member</h4>
-                               </div>
-
-                               <div class="modal-body">
-                                   <h4>Choose a team then add the team members</h4>
-
-                                   <div>
-
-
-                                   </div>
-                               </div>
-
-                               <div class="modal-footer">
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal"><?php echo e(__('voyager::generic.close')); ?></button>
-                                      <form action="#" id="delete_form" method="POST">
-                                          {{ method_field('POST') }}
-                                          {{ csrf_field() }}
-                                          <input type="submit" class="btn btn-info pull-right" value="Add">
-                                    </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
 
 
 
@@ -348,6 +314,46 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+     <div class="modal modal-info fade" tabindex="-1" id="add_team_member_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('voyager::generic.close') }}"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="voyager-trash"></i> Assign a challenge to a user</h4>
+                    </div>
+                    <div class='modal-content'>
+                     <form action="{{ route('teams.addTeamMember') }}" id="add_team_member_form" method="post">
+                         {{ method_field('POST') }}
+                         {{ csrf_field() }}
+                        <div>
+                            <h4>Choose a user</h4>
+                             <select name="usersToAssign" id="usersToAssign">
+                                @foreach($users as $user)
+                                     <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                        <div>
+                            <h4>Choose a team</h4>
+                            <select name="challengeToAssign" id="challengeToAssign">
+                                @foreach($dataTypeContent as $data)
+                                     <option value="{{$data->id}}">{{$data->teamName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                           <input type="submit" id="assign_button" class="btn btn-info pull-right" value="Add">
+                    </div>
+                    </form>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
 @stop
 
 @section('css')
@@ -401,8 +407,8 @@
             $('#delete_modal').modal('show');
         });
 
-        $('#add_team_member').on('click', function (e) {
-            $('#add_member_modal').modal('show');
+        $('#add_team_member_button').on('click', function (e) {
+            $('#add_team_member_modal').modal('show');
         });
 
 

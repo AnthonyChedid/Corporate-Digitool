@@ -28,7 +28,7 @@
             @endif
         @endcan
 
-        <button id="assignChallenge">Assign a challenge</button>
+        <button id="assignChallenge"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Assign a challenge</button>
 
         @foreach($actions as $action)
             @if (method_exists($action, 'massAction'))
@@ -263,7 +263,7 @@
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
-                                            <button onclick="window.location='/admin/tasks/view/{{ $data->getKey() }}'" id='taskButton'>View Task</button>
+                                            <button onclick="window.location='/admin/tasks/view/{{ $data->getKey() }}'"  style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; " id='taskButton'>View Task</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -335,7 +335,7 @@
                         </div>
                         <div>
                             <h4>Choose a challenge</h4>
-                            <select name="usersToAssign" id="usersToAssign">
+                            <select name="challengeToAssign" id="challengeToAssign">
                                 @foreach($dataTypeContent as $data)
                                      <option value="{{$data->id}}">{{$data->name}}</option>
                                 @endforeach
@@ -343,10 +343,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form action="#" id="delete_form" method="POST">
-                            {{ method_field('DELETE') }}
+                        <form action="{{ route('challenges.assignAChallenge') }}" id="assign_form" method="post">
+                            {{ method_field('POST') }}
                             {{ csrf_field() }}
-                            <input type="submit" class="btn btn-info pull-right" value="Assign">
+                            <input type="submit" id="assign_button" class="btn btn-info pull-right" value="Assign">
                         </form>
                         <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
                     </div>

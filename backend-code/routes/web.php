@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TeamUserController;
 use App\Http\Controllers\AssignedChallengeController;
 
 
@@ -27,7 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/tasks/view/{id}', 'App\Http\Controllers\TaskController@showTasksOfChallenge');
     Route::post('/tasks/create/{id}', 'App\Http\Controllers\TaskController@addTaskToChallenge');
 
-    Route::post('/challenges/assignAChallenge', 'App\Http\Controllers\AssignedChallengeController@assignUserToChallenge');
-
+    Route::post('/challenges/assignAChallenge', 'App\Http\Controllers\AssignedChallengeController@assignUserToChallenge')->name('challenges.assignAChallenge');
+    Route::post('/teams/addTeamMember', 'App\Http\Controllers\TeamUserController@addTeamMember')->name('teams.addTeamMember');
 
 });

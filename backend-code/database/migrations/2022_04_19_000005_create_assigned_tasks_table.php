@@ -18,10 +18,9 @@ class CreateAssignedTasksTable extends Migration
             $table->unsignedBigInteger('task_id');
             $table->foreign('task_id')->references('id')->on('tasks');
             $table->integer('task_score');
-            $table->double('completionTime');
+            $table->int('completionTime');
             $table->unsignedBigInteger('assignedchallenge_id');
             $table->foreign('assignedchallenge_id')->references('id')->on('assigned_challenges');
-            $table->timestamps();
         });
     }
 
