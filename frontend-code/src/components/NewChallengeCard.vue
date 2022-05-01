@@ -47,7 +47,7 @@ export default {
           chall_id:0,
         }
       },
-  props:['name','type','description','buttonText','challenge_id','file'],
+  props:['name','type','description','buttonText','challenge_id','file','fileType'],
   watch: {
     challenge_id: function(newVal) { 
         this.chall_id = newVal
@@ -61,8 +61,16 @@ export default {
                 this.$emit('clicked');
                 var a = document.createElement("a"); //Create <a>
                // a.href = "data:image/png;base64," + this.file; //Image Base64 Goes here
-                a.href = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + this.file;
-                a.download = "Image.xlsx"; //File name Here
+               console.log(this.fileType);
+               if(this.fileType == "excel"){
+                  a.href = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + this.file;
+                  a.download = "corporate_digitool.xlsx"; //File name Here
+               }
+               if(this.fileType == "pdf"){
+                 
+                 a.href="data:application/pdf;base64,"+this.file;
+                 a.download="corporate_digitool.pdf"
+               }
                 a.click(); //Downloaded file
               },
               error => {

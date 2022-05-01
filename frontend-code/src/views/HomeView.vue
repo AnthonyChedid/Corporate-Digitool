@@ -4,7 +4,7 @@
       class="pa-6 d-flex "
     >  
     <div v-for="challenge in this.$store.state.challenges.newChallenges" :key="challenge.id">
-      <new-challenge-card :file="challenge.challenge_id[0].challenge_document" :challenge_id="challenge.id" @clicked="challengeId=challenge.id;onClickCard();" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].challenge_type_id.typeName" description="a descriptuon" buttonText="Start Challenge" >
+      <new-challenge-card :fileType="challenge.challenge_id[0].document_type_id.typeName" :file="challenge.challenge_id[0].challenge_document" :challenge_id="challenge.id" @clicked="challengeId=challenge.id;onClickCard();" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].challenge_type_id.typeName" description="a descriptuon" buttonText="Start Challenge" >
       </new-challenge-card>
       <br/>
       <challenge-dialog :challenge_id="challenge.id" @finishedChallenge="onFinishChallenge()" @clicked="onClickCard()" :dialog="toggleDialog" />
