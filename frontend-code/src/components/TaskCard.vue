@@ -1,5 +1,5 @@
-<template>
-    <v-tab-item>
+<template >
+    <v-tab-item v-observe-visibility="visibilityChanged">
         <v-card flat>
         <v-card-text>Description: {{description}}</v-card-text>
         <v-text-field
@@ -66,6 +66,9 @@
 
 <script>
 import SuccessfulAnswerSnack from './SuccessfulAnswerSnack.vue'
+import VueObserveVisibility from 'vue-observe-visibility'
+import Vue from 'vue'
+Vue.use(VueObserveVisibility)
 export default {
   
     data () {
@@ -96,6 +99,10 @@ export default {
     },
 
     methods:{
+      visibilityChanged (isVisible, entry) {
+        this.currTime=new Date();
+      },
+
       maybeSubmitAnswer(){
         this.dialog=true;
       },
