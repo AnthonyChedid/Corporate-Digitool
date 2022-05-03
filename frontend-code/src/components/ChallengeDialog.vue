@@ -47,6 +47,8 @@
                   :description="task.task_id[0].description"
                   :id="task.id"
                   :correctAnswer="task.task_id[0].result"
+                  :challengeType="task.task_id[0].challenge_id.challenge_type_id.typeName"
+                  :taskName="task.task_id[0].taskName"
                 >
                 </task-card>
               </v-tabs-items>

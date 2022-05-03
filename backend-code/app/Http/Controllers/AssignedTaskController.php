@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AssignedTask;
 use App\Models\Competence;
+use App\Models\Challenge;
+use App\Models\ChallengeType;
 use App\Models\Task;
 
 class AssignedTaskController extends Controller
@@ -20,8 +22,15 @@ class AssignedTaskController extends Controller
         $a=AssignedTask::where('assignedchallenge_id',$id)->get();
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->task_id;
-            $challenge=Task::where('id',$id)->get();
-            $a[$x]->task_id=$challenge;
+            $task=Task::where('id',$id)->get();
+            $challenge_id=$task[0]->challenge_id;
+            $challenge_id=Challenge::where('id',$challenge_id)->get()->first();
+            $challenge_id->challenge_document = base64_encode($challenge_id->challenge_document);
+            $challenge_type_id=$challenge_id->challenge_type_id;
+            $challenge_type_id=ChallengeType::where('id',$challenge_type_id)->get()->first();
+            $challenge_id->challenge_type_id=$challenge_type_id;
+            $task[0]->challenge_id=$challenge_id;
+            $a[$x]->task_id=$task;
         }
         return $a;
     }
@@ -75,9 +84,16 @@ class AssignedTaskController extends Controller
         $id=$request->id;
         $score= $request->score;
         $time= $request->time;
+        $type= $request->type;
+        $file= $request->file;
 
-        return AssignedTask::where('id',$id)
-                    ->update(['task_score' => $score,'completionTime' => $time]);
+        if($type == "Research"){
+            return AssignedTask::where('id',$id)->update(['task_score' => $score,'completionTime' => $time]);
+        }
+        else{
+            echo $file;
+        }
+        
     }
 
     /**
