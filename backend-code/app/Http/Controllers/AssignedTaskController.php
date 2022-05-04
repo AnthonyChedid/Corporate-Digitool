@@ -85,17 +85,18 @@ class AssignedTaskController extends Controller
         $score= $request->score;
         $time= $request->time;
         $type= $request->type;
-        $file= $request->file;
+        $fileType= $request->fileType;
+        $file=$request->file;
 
         if($type == "Research"){
             return AssignedTask::where('id',$id)->update(['task_score' => $score,'completionTime' => $time]);
         }
         else{
-            echo $file;
+           // $filename = $file[0]->file('file_name')->getClientOriginalName();
+            return $file;
         }
         
     }
-
     /**
      * Remove the specified resource from storage.
      *
