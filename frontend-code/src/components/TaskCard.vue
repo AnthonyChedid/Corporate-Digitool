@@ -10,13 +10,17 @@
             :disabled="formDisabled"
             v-if="research"
         ></v-text-field>
-        <v-file-input
+        <br/>
+        <input type="file" id="input_dom_element" label="File input" :disabled="formDisabled"
+          v-if="!research" @change="previewFiles">
+        <br/><br/><br/>
+        <!-- <v-file-input
           accept="*"
           label="File input"
           :disabled="formDisabled"
-          v-if="creation"
+          v-if="!research"
           v-model="files"
-        ></v-file-input>
+        ></v-file-input> -->
           <v-btn
             depressed
             color="primary"
@@ -99,6 +103,10 @@ export default {
     },
 
     methods:{
+      previewFiles(event) {
+        this.files=event.target.files
+      },
+
       visibilityChanged (isVisible, entry) {
         this.currTime=new Date();
       },
@@ -109,6 +117,7 @@ export default {
 
       submitAnswer(){
         this.dialog=false;
+        console.log(this.files)
         var d = new Date();
         var dif = d.getTime() - this.currTime.getTime();
         var Seconds_from_T1_to_T2 = dif / 1000;
@@ -121,7 +130,9 @@ export default {
             score : 1,
             time:Seconds_Between_Dates,
             type:this.challengeType,
-            taskName:this.taskName
+            taskName:this.taskName,
+            file:this.files,
+            fileType:this.files.type 
           }
         }
         else{
@@ -130,14 +141,22 @@ export default {
             score : 0,
             time:Seconds_Between_Dates,
             type:this.challengeType,
-            taskName:this.taskName
+            taskName:this.taskName,
+            file:this.files,
+            fileType:this.files.type
           }
         }
-        this.$store.dispatch('challenges/answerTask',this.body).then(()=>{
-          this.formDisabled=true
-          this.showSnack=true
-          })
-        this.previousTime=Seconds_Between_Dates-this.previousTime
+        if(this.challengeType == "Research"){
+          this.$store.dispatch('challenges/answerTask',this.body).then(()=>{        
+            this.formDisabled=true
+            this.showSnack=true})
+        }
+        if(this.challengeType == "Creation"){
+
+          this.$store.dispatch('challenges/asnwerExcelCreationTask',this.body).then(()=>{        
+            this.formDisabled=true
+            this.showSnack=true})   
+        }
       },
     },
 
@@ -154,3 +173,4 @@ template{
   height: 3000px;
 }
 </style>
+

@@ -18,6 +18,9 @@ const initialState = {
     },
 
     actions: {
+      asnwerExcelCreationTask({commit},body){
+        UserService.asnwerExcelCreationTask(body)
+      },
       getNewChallenges({ commit },id) {
         UserService.getNewChallenges(id).then(res=>commit('getNewChallengesSuccess', res))
       },
@@ -35,7 +38,7 @@ const initialState = {
       },
       resultTasks({commit},id){
         UserService.getResultTasks(id).then(res=>commit('getResultTasksSuccess', res))
-      }
+      },
     },
     mutations: {
       getNewChallengesSuccess(state, challenges) {
