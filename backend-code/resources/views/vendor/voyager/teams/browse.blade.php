@@ -325,7 +325,7 @@
                     <div class='modal-content'>
 
 
-                    {!!Form::open(['action'=>'teams.addTeamMember','method'=>'POST']) !!}
+                    {!!Form::open(['route'=>'teams.addTeamMember','method'=>'POST']) !!}
                         <div class="form-group">
                             {{Form::label('user','User')}}
                             {{Form::select('user',$users->pluck('name','id'))}}

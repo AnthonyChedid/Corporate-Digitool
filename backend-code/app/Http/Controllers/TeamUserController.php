@@ -13,9 +13,15 @@ use Illuminate\Http\Request;
 class TeamUserController extends VoyagerBaseController
 {
     public function addTeamMember(Request $request){
-        team_user::create([
-            'team_id'=>$request->team;
-            'user_id'=>$request->user;
-        ]);
+        $teamMember=team_user::where('team_id',$request->team)
+                    ->where('user_id',$request->user)->first();
+
+        if(!$teamMember){team_user::create([
+            'team_id'=>$request->team,
+            'user_id'=>$request->user,
+        ]);}
+
+        return redirect()->back();
+
     }
 }
