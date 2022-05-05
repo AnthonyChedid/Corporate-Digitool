@@ -29,6 +29,7 @@
         @endcan
 
         <button id="assignChallenge"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Assign a challenge</button>
+        <button id="assignChallengeToTeam"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Assign a challenge to Team</button>
 
         @foreach($actions as $action)
             @if (method_exists($action, 'massAction'))
@@ -45,7 +46,33 @@
         <div class="row">
             <div class="col-md-12">
 
+            <div class="modal modal-info fade" tabindex="-1" id="assign_to_team_modal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('voyager::generic.close') }}"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title"><i class="voyager-trash"></i> Assign a challenge to a user</h4>
+                                </div>
+                                <div class='modal-content'>
 
+                                    {!!Form::open(['route'=>'challenges.assignTeamToChallenge','method'=>'POST']) !!}
+                                        <div class="form-group">
+                                            {{Form::label('team','Team')}}
+                                            {{Form::select('team',$teams->pluck('teamName','id'))}}
+                                        </div>
+                                        <div class="form-group">
+                                            {{Form::label('challenge','Challenge')}}
+                                            {{Form::select('challenge',$dataTypeContent->pluck('name','id'))}}
+                                        </div>
+                                        <div>
+                                            {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
+                                        </div>
+                                    {!! Form::close() !!}
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                     </div><!-- /.modal -->
 
 
                 <div class="panel panel-bordered">
@@ -400,6 +427,10 @@
 
         $('#assignChallenge').on('click', function (e) {
             $('#assign_modal').modal('show');
+        });
+
+         $('#assignChallengeToTeam').on('click', function (e) {
+            $('#assign_to_team_modal').modal('show');
         });
 
 

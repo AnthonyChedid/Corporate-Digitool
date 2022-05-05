@@ -24,6 +24,8 @@
 
                                         <th>Task Name</th>
                                         <th>Description</th>
+                                        <th>Result</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,6 +33,10 @@
                                     <tr>
                                          <td>{{$task->taskName}}</td>
                                          <td>{{$task->description}}</td>
+                                         <td>{{$task->result}}</td>
+                                          <td>
+                                            <button onclick="window.location='/admin/tasks/delete/{{$task->id}}'">Delete Task</button>
+                                          </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

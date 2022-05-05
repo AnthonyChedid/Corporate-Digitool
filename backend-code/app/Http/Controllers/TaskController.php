@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Competence;
+use App\Models\AssignedTask;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 class TaskController extends VoyagerBaseController
 {
@@ -41,5 +42,21 @@ class TaskController extends VoyagerBaseController
             return redirect()->route('tasks.showTasks', [$challenge_id]);
         }
 
+        public function deleteTask($taskId){
+            //delete assigned task
+            $correspondingAssignedTask=AssignedTask::where ('task_id',$taskId)->get();
+            if($correspondingAssignedTask){
+                for ($x = 0; $x <count($correspondingAssignedTask); $x++) {
+                   $correspondingAssignedTask[$x]->delete();
+                }
+            }
+
+            //delete the task
+            $correspondingTask=Task::find($taskId);
+            $correspondingTask->delete();
+            return redirect()->back();
+
+
+        }
 
 }

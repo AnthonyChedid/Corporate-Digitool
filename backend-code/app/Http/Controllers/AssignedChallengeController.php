@@ -7,6 +7,7 @@ use App\Models\ChallengeType;
 use App\Models\DocumentType;
 use App\Models\AssignedTask;
 use App\Models\Task;
+use App\Models\team_user;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use Illuminate\Http\Request;
@@ -129,6 +130,24 @@ class AssignedChallengeController extends VoyagerBaseController
 
         return redirect()->back();
 
+        }
+
+
+        public function assignTeamToChallenge(Request $request){
+        //Find team members
+        $teamMembers=team_user::where('team_id',$request->team)->get();
+
+        //assign each team member to the challenge
+        for ($x = 0; $x <count($teamMembers); $x++) {
+            $requestToSend = new \Illuminate\Http\Request();
+            $requestToSend->setMethod('POST');
+            $requestToSend->request->add(['user'=>$teamMembers[$x]->user_id,
+                                          'challenge'=>$request->challenge]);
+
+           $this->assignUserToChallenge($requestToSend);
+        }
+
+        return redirect()->back();
 
         }
 }

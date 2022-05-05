@@ -28,8 +28,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/tasks/view/{id}', 'App\Http\Controllers\TaskController@showTasksOfChallenge')->name('tasks.showTasks');
     Route::get('/tasks/create/{id}', 'App\Http\Controllers\TaskController@addTaskToChallenge')->name('tasks.addATask');
     Route::post('/tasks/submit/{id}', 'App\Http\Controllers\TaskController@submitTaskToChallenge')->name('tasks.submitTask');
+    Route::get('/tasks/delete/{id}', 'App\Http\Controllers\TaskController@deleteTask')->name('tasks.deleteTask');
 
     Route::post('/challenges/assignAChallenge', 'App\Http\Controllers\AssignedChallengeController@assignUserToChallenge')->name('challenges.assignAChallenge');
+    Route::post('/challenges/assignAChallengeToTeam', 'App\Http\Controllers\AssignedChallengeController@assignTeamToChallenge')->name('challenges.assignTeamToChallenge');
     Route::post('/teams/addTeamMember', 'App\Http\Controllers\TeamUserController@addTeamMember')->name('teams.addTeamMember');
 
 });

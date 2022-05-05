@@ -19,6 +19,7 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use App\Models\User;
+use App\Models\Team;
 
 class ChallengeController extends VoyagerBaseController
 {
@@ -174,6 +175,7 @@ class ChallengeController extends VoyagerBaseController
             }
 
             $users=User::where('role_id',2)->get();
+            $teams=Team::all();
 
             return Voyager::view($view, compact(
                 'actions',
@@ -191,7 +193,8 @@ class ChallengeController extends VoyagerBaseController
                 'usesSoftDeletes',
                 'showSoftDeleted',
                 'showCheckboxColumn',
-                'users'
+                'users',
+                'teams'
             ));
         }
 }
