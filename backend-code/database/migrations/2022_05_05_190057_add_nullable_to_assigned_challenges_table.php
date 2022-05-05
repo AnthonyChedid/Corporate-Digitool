@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddNullableToAssignedChallengesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('assigned_challenges', function (Blueprint $table) {
+            $table->integer('score')->nullable()->change();
+            $table->integer('totalTime')->nullable()->change();
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('assigned_challenges', function (Blueprint $table) {
+            //
+        });
+    }
+}

@@ -323,31 +323,23 @@
                         <h4 class="modal-title"><i class="voyager-trash"></i> Assign a challenge to a user</h4>
                     </div>
                     <div class='modal-content'>
-                     <form action="{{ route('teams.addTeamMember') }}" id="add_team_member_form" method="post">
-                         {{ method_field('POST') }}
-                         {{ csrf_field() }}
-                        <div>
-                            <h4>Choose a user</h4>
-                             <select name="usersToAssign" id="usersToAssign">
-                                @foreach($users as $user)
-                                     <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                            </select>
 
+
+                    {!!Form::open(['route'=>'teams.addTeamMember','method'=>'POST']) !!}
+                        <div class="form-group">
+                            {{Form::label('user','User')}}
+                            {{Form::select('user',$users->pluck('name','id'))}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('team','Team')}}
+                            {{Form::select('team',$dataTypeContent->pluck('teamName','id'))}}
                         </div>
                         <div>
-                            <h4>Choose a team</h4>
-                            <select name="challengeToAssign" id="challengeToAssign">
-                                @foreach($dataTypeContent as $data)
-                                     <option value="{{$data->id}}">{{$data->teamName}}</option>
-                                @endforeach
-                            </select>
+                            {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
                         </div>
-                    </div>
-                    <div>
-                           <input type="submit" id="assign_button" class="btn btn-info pull-right" value="Add">
-                    </div>
-                    </form>
+                    {!! Form::close() !!}
+
+
 
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -410,6 +402,7 @@
         $('#add_team_member_button').on('click', function (e) {
             $('#add_team_member_modal').modal('show');
         });
+
 
 
         @if($usesSoftDeletes)

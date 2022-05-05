@@ -4,9 +4,9 @@
 @section('page_header')
     <div class="container-fluid">
         <h1 class="page-title">
-          <p>Tasks of Challenges {{$tasks[0]->challenge_id}}</p>
+          <p>List of tasks</p>
         </h1>
-          <button id='add_task' onClick="window.location='/admin/tasks/create'">Add A Task</button>
+          <button id='add_task' onClick="window.location='/admin/tasks/create/{{$challenge_id}}'" method="POST">Add A Task</button>
 
     </div>
 @stop

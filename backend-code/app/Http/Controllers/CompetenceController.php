@@ -8,15 +8,6 @@ use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 class CompetenceController extends VoyagerBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return Competence::all();
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,16 +24,6 @@ class CompetenceController extends VoyagerBaseController
         return Competence::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return Competence::find($id);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -58,16 +39,6 @@ class CompetenceController extends VoyagerBaseController
         return $competence;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return Competence::destroy($id);
-    }
 
      /**
      * Search for a team

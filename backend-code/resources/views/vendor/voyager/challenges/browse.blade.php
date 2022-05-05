@@ -316,7 +316,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-     <div class="modal modal-info fade" tabindex="-1" id="assign_modal" role="dialog">
+         <div class="modal modal-info fade" tabindex="-1" id="assign_modal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -324,32 +324,24 @@
                         <h4 class="modal-title"><i class="voyager-trash"></i> Assign a challenge to a user</h4>
                     </div>
                     <div class='modal-content'>
-                        <div>
-                            <h4>Choose a user</h4>
-                             <select name="usersToAssign" id="usersToAssign">
-                                @foreach($users as $user)
-                                     <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                            </select>
 
+
+                    {!!Form::open(['route'=>'challenges.assignAChallenge','method'=>'POST']) !!}
+                        <div class="form-group">
+                            {{Form::label('user','User')}}
+                            {{Form::select('user',$users->pluck('name','id'))}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('challenge','Challenge')}}
+                            {{Form::select('challenge',$dataTypeContent->pluck('name','id'))}}
                         </div>
                         <div>
-                            <h4>Choose a challenge</h4>
-                            <select name="challengeToAssign" id="challengeToAssign">
-                                @foreach($dataTypeContent as $data)
-                                     <option value="{{$data->id}}">{{$data->name}}</option>
-                                @endforeach
-                            </select>
+                            {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <form action="{{ route('challenges.assignAChallenge') }}" id="assign_form" method="post">
-                            {{ method_field('POST') }}
-                            {{ csrf_field() }}
-                            <input type="submit" id="assign_button" class="btn btn-info pull-right" value="Assign">
-                        </form>
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
-                    </div>
+                    {!! Form::close() !!}
+
+
+
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
