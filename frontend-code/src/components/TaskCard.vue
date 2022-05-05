@@ -152,7 +152,6 @@ export default {
             this.showSnack=true})
         }
         if(this.challengeType == "Creation"){
-
           this.$store.dispatch('challenges/asnwerExcelCreationTask',this.body).then(()=>{        
             this.formDisabled=true
             this.showSnack=true})   
