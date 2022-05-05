@@ -5,6 +5,8 @@ use App\Models\AssignedChallenge;
 use App\Models\Challenge;
 use App\Models\ChallengeType;
 use App\Models\DocumentType;
+use App\Models\AssignedTask;
+use App\Models\Task;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class AssignedChallengeController extends VoyagerBaseController
         $a=AssignedChallenge::where('user_id',$id)->where('isFinished',false)->get();
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->challenge_id;
-            
+
             $challenge=Challenge::where('id',$id)->get();
             $type=$challenge[0]->challenge_type_id;
             $type=ChallengeType::where('id',$type)->get()->first();
@@ -47,7 +49,7 @@ class AssignedChallengeController extends VoyagerBaseController
         $a=AssignedChallenge::where('user_id',$id)->where('isFinished',true)->get();
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->challenge_id;
-            
+
             $challenge=Challenge::where('id',$id)->get();
             $type=$challenge[0]->challenge_type_id;
             $type=ChallengeType::where('id',$type)->get()->first();
@@ -72,7 +74,7 @@ class AssignedChallengeController extends VoyagerBaseController
         $a=AssignedChallenge::where('user_id',$id)->where('isFinished',true)->get();
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->challenge_id;
-            
+
             $challenge=Challenge::where('id',$id)->get();
             $type=$challenge[0]->challenge_type_id;
             $type=ChallengeType::where('id',$type)->get()->first();
@@ -99,6 +101,34 @@ class AssignedChallengeController extends VoyagerBaseController
 
 
     public function assignUserToChallenge(Request $request){
+        $assignedChallenge=AssignedChallenge::where('user_id',$request->user)
+                    ->where('challenge_id',$request->challenge)->first();
+
+        if(!$assignedChallenge){
+            //Create a new assigned Challenge
+             $assignedChallenge = AssignedChallenge::create([
+                 'challenge_id'=>$request->challenge,
+                 'user_id'=>$request->user,
+                 'isFinished'=>false,
+             ]);
+
+             //find the tasks to the corresponding challenge
+             $correspondingTask=Task::where ('challenge_id',$request->challenge)->get();
+
+            //Create new assigned Tasks
+            for ($x = 0; $x <count($correspondingTask); $x++) {
+                $correspondingAssignedTask=AssignedTask::create([
+                        'task_id'=>$correspondingTask[$x]->id,
+                        'assignedchallenge_id'=>$assignedChallenge->id,
+                    ]);
+
+            }
+
+
+        }
+
+        return redirect()->back();
+
 
         }
 }

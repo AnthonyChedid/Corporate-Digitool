@@ -25,8 +25,9 @@ Route::get('/api/1', function () {
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
-    Route::get('/tasks/view/{id}', 'App\Http\Controllers\TaskController@showTasksOfChallenge');
-    Route::post('/tasks/create/{id}', 'App\Http\Controllers\TaskController@addTaskToChallenge');
+    Route::get('/tasks/view/{id}', 'App\Http\Controllers\TaskController@showTasksOfChallenge')->name('tasks.showTasks');
+    Route::get('/tasks/create/{id}', 'App\Http\Controllers\TaskController@addTaskToChallenge')->name('tasks.addATask');
+    Route::post('/tasks/submit/{id}', 'App\Http\Controllers\TaskController@submitTaskToChallenge')->name('tasks.submitTask');
 
     Route::post('/challenges/assignAChallenge', 'App\Http\Controllers\AssignedChallengeController@assignUserToChallenge')->name('challenges.assignAChallenge');
     Route::post('/teams/addTeamMember', 'App\Http\Controllers\TeamUserController@addTeamMember')->name('teams.addTeamMember');
