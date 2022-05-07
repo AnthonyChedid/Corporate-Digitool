@@ -38,7 +38,6 @@ import ChallengeDialog from '../components/ChallengeDialog.vue'
                ); 
       
     },
-
     methods:{
       onClickCard(value){
         this.$store.dispatch('challenges/finishChallenge',this.challengeId)

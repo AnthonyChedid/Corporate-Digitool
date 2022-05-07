@@ -95,7 +95,9 @@ class AssignedChallengeController extends VoyagerBaseController
     public function finishChallenge(Request $request)
     {
         $id = $request->id;
-        AssignedChallenge::where('id',$id)->update(['isFinished' => true]);
+        $totalTime = AssignedTask::where('assignedchallenge_id',$id)->sum('completionTime');
+        $totalScore = AssignedTask::where('assignedchallenge_id',$id)->sum('task_score');
+        AssignedChallenge::where('id',$id)->update(['isFinished' => true,'score'=>$totalScore,'totalTime'=>$totalTime]);
 
     }
 

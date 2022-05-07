@@ -90,7 +90,7 @@ export default {
 
       }
     },
-    props:['description','correctAnswer','id','challengeType','taskName'],
+    props:['description','correctAnswer','id','challengeType','taskName','competenceId'],
     created() {
       this.currTime=new Date();
       if(this.challengeType=="Creation"){
@@ -132,7 +132,9 @@ export default {
             type:this.challengeType,
             taskName:this.taskName,
             file:this.files,
-            fileType:this.files.type 
+            fileType:this.files.type,
+            competenceId:this.competenceId,
+            userId: JSON.parse(localStorage.getItem('user')).id  
           }
         }
         else{
@@ -143,7 +145,9 @@ export default {
             type:this.challengeType,
             taskName:this.taskName,
             file:this.files,
-            fileType:this.files.type
+            fileType:this.files.type,
+            competenceId:this.competenceId,
+            userId: JSON.parse(localStorage.getItem('user')).id 
           }
         }
         if(this.challengeType == "Research"){
