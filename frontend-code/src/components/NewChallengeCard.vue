@@ -4,36 +4,26 @@
     class="mx-auto"
     max-width="344"
     outlined
+    style="color:black"
+    height="350"
   >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="text-overline mb-4">
-          Name: {{name}}
-        </div>
-        <v-list-item-title class="text-h5 mb-1">
-          Type: {{type}}
-        </v-list-item-title>
-        <v-list-item-subtitle>{{description}}</v-list-item-subtitle>
-      </v-list-item-content>
+  <v-img
+      :src="this.image"
+      height="200px"
+    ></v-img>
 
-      <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-      ></v-list-item-avatar>
-    </v-list-item>
+    <v-card-title>
+      {{name}}
+    </v-card-title>
 
     <v-card-actions>
       <v-btn
-        outlined
         rounded
-        text
         @click="onClickButton()"
       >
-      {{buttonText}}
+        Start Challenge
       </v-btn>
     </v-card-actions>
-    
   </v-card>
   </div>
 </template>
@@ -45,6 +35,8 @@ export default {
         return {
           toggleDialog:false,
           chall_id:0,
+          show: false,
+          image:null
         }
       },
   props:['name','type','description','buttonText','challenge_id','file','fileType'],
@@ -53,6 +45,18 @@ export default {
         this.chall_id = newVal
     }
   },
+
+  created() {
+      if(this.fileType == "excel"){
+        this.image="excel_img.jpg"
+      }
+      if(this.fileType == "word"){
+        this.image="word.jpg"
+      }
+      if(this.fileType == "powerpoint"){
+        this.image="powerpoint.jpg"
+      }
+    },
   
   methods:{
     onClickButton (event) {
@@ -71,6 +75,16 @@ export default {
                  a.href="data:application/pdf;base64,"+this.file;
                  a.download="corporate_digitool.pdf"
                }
+               if(this.fileType == "powerpoint"){
+                 
+                 a.href="application/vnd.openxmlformats-officedocument.presentationml.presentation;base64"+this.file;
+                 a.download="corporate_digitool.pptx"
+               }
+               if(this.fileType == "word"){
+                 
+                 a.href="application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file;
+                 a.download="corporate_digitool.docx"
+               }               
                 a.click(); //Downloaded file
               },
               error => {

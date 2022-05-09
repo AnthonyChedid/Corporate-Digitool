@@ -77,9 +77,12 @@ class UserService {
       headers: authHeader(),
     };
     let newBody = JSON.parse(JSON.stringify(body));
+    if(body.taskName == "Insert table in excel file"){
+    
     body.file[0].arrayBuffer().then((res)=>{ 
       var wb = XLSX.read(res);
       var excel = wb.Sheets
+      console.log(wb);
       if(
         Lodash.isEqual(excel.Sheet1.A1,{t: 's', v: 'id', r: '<t>id</t>', h: 'id', w: 'id'}) &&
         Lodash.isEqual(excel.Sheet1.A2,{t: 'n', v: 1, w: '1'})&&
@@ -118,6 +121,31 @@ class UserService {
     });
 
   }
-  
+  if(body.taskName == "Upload file as PDf"){
+    if(body.file[0].type == "application/pdf"){
+      newBody.score=1
+      axios.patch(API_URL + 'task',newBody,config);
+    }
+    else{
+      newBody.score=0
+      axios.patch(API_URL + 'task',newBody,config);
+    }
+  }
+  if(body.taskName == "Add theme to excel file"){
+    body.file[0].arrayBuffer().then((res)=>{ 
+      var wb = XLSX.read(res);
+      console.log(wb);
+      if(Lodash.isEmpty(wb.Themes)){
+        newBody.score=0
+        axios.patch(API_URL + 'task',newBody,config);        
+      }
+      else{
+        newBody.score=1
+        console.log(wb.Themes)
+        axios.patch(API_URL + 'task',newBody,config);
+      }
+    })
+  }
+}
 }
 export default new UserService();
