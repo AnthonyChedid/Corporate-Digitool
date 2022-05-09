@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamUserController;
 use App\Http\Controllers\AssignedChallengeController;
+use App\Http\Controllers\CompetenceUserController;
 
 
 /*
@@ -32,6 +33,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::post('/challenges/assignAChallenge', 'App\Http\Controllers\AssignedChallengeController@assignUserToChallenge')->name('challenges.assignAChallenge');
     Route::post('/challenges/assignAChallengeToTeam', 'App\Http\Controllers\AssignedChallengeController@assignTeamToChallenge')->name('challenges.assignTeamToChallenge');
+
+    Route::get('/users/view/{id}', 'App\Http\Controllers\AssignedChallengeController@showCorrespondingUsers')->name('assignedChallenge.showCorrespondingUsers');
+
+    Route::get('competences/view/{id}', 'App\Http\Controllers\CompetenceUserController@showCorrespondingCompetences')->name('competences.showCorrespondingCompetences');
+
     Route::post('/teams/addTeamMember', 'App\Http\Controllers\TeamUserController@addTeamMember')->name('teams.addTeamMember');
 
 });
