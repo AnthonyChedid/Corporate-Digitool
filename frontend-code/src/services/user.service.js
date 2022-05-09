@@ -82,7 +82,7 @@ class UserService {
     body.file[0].arrayBuffer().then((res)=>{ 
       var wb = XLSX.read(res);
       var excel = wb.Sheets
-      console.log(wb);
+      console.log("honnn");
       if(
         Lodash.isEqual(excel.Sheet1.A1,{t: 's', v: 'id', r: '<t>id</t>', h: 'id', w: 'id'}) &&
         Lodash.isEqual(excel.Sheet1.A2,{t: 'n', v: 1, w: '1'})&&

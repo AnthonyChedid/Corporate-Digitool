@@ -4,11 +4,12 @@
       class="spacing-playground pa-6 d-flex align-center"
       fluid
     >
-    <div v-for="challenge in challenges" :key="challenge.id">
-      <result-challenge-card :challenge_id="challenge.id" @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].type" description="a edscriptuon"/>
+    <v-row>
+    <v-col cols="4" v-for="challenge in challenges" :key="challenge.id">
+      <result-challenge-card :challenge_id="challenge.id" @clicked="onClickCard()" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].challenge_type_id.typeName" :date="challenge.updated_at.substring(0,10)"/>
       
-    </div>
-    
+    </v-col>
+    </v-row>
     </v-container>
     <sidebar message="Previous Challenges" />
     <result-dialog @clicked="onClickCard()" :dialog="toggleDialog"/>

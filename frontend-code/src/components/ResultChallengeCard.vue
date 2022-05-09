@@ -3,6 +3,7 @@
   <v-card
     class="mx-auto"
     max-width="344"
+    min-width="344"
     outlined
   >
     <v-list-item three-line>
@@ -12,6 +13,9 @@
         </div>
         <v-list-item-title class="text-h5 mb-1">
           Type: {{type}}
+        </v-list-item-title>
+        <v-list-item-title class="text-h5 mb-1">
+          Date: {{date}}
         </v-list-item-title>
         <v-list-item-subtitle>{{description}}</v-list-item-subtitle>
       </v-list-item-content>
@@ -47,7 +51,7 @@ export default {
           chall_id:0,
         }
       },
-  props:['name','type','description','buttonText','challenge_id'],
+  props:['name','type','description','buttonText','challenge_id',"date"],
   watch: {
     challenge_id: function(newVal) { 
         this.chall_id = newVal

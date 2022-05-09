@@ -5,11 +5,11 @@
     max-width="344"
     outlined
     style="color:black"
-    height="350"
+    height="275"
   >
   <v-img
       :src="this.image"
-      height="200px"
+      height="150px"
     ></v-img>
 
     <v-card-title>
@@ -65,27 +65,28 @@ export default {
                 this.$emit('clicked');
                 var a = document.createElement("a"); //Create <a>
                // a.href = "data:image/png;base64," + this.file; //Image Base64 Goes here
-               console.log(this.fileType);
-               if(this.fileType == "excel"){
-                  a.href = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + this.file;
-                  a.download = "corporate_digitool.xlsx"; //File name Here
+               if(this.type == "Research"){
+                if(this.fileType == "excel"){
+                    a.href = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + this.file;
+                    a.download = "corporate_digitool.xlsx"; //File name Here
+                }
+                if(this.fileType == "pdf"){
+                  
+                  a.href="data:application/pdf;base64,"+this.file;
+                  a.download="corporate_digitool.pdf"
+                }
+                if(this.fileType == "powerpoint"){
+                  
+                  a.href="application/vnd.openxmlformats-officedocument.presentationml.presentation;base64,"+this.file;
+                  a.download="corporate_digitool.pptx"
+                }
+                if(this.fileType == "word"){
+                  
+                  a.href="application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file[0];
+                  a.download="corporate_digitool.docx"
+                }               
+                  a.click(); //Downloaded file
                }
-               if(this.fileType == "pdf"){
-                 
-                 a.href="data:application/pdf;base64,"+this.file;
-                 a.download="corporate_digitool.pdf"
-               }
-               if(this.fileType == "powerpoint"){
-                 
-                 a.href="application/vnd.openxmlformats-officedocument.presentationml.presentation;base64"+this.file;
-                 a.download="corporate_digitool.pptx"
-               }
-               if(this.fileType == "word"){
-                 
-                 a.href="application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file;
-                 a.download="corporate_digitool.docx"
-               }               
-                a.click(); //Downloaded file
               },
               error => {
                 if(error){
