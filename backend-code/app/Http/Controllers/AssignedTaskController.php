@@ -8,6 +8,7 @@ use App\Models\Competence;
 use App\Models\Challenge;
 use App\Models\ChallengeType;
 use App\Models\Task;
+use App\Models\competence_user;
 
 class AssignedTaskController extends Controller
 {
@@ -23,7 +24,7 @@ class AssignedTaskController extends Controller
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->task_id;
             $task=Task::where('id',$id)->get();
-            $competence=Competence::where('id',$task[0]->competence_id)->get()->first();            
+            $competence=Competence::where('id',$task[0]->competence_id)->get()->first();
             $task[0]->competence_id=$competence;
             $challenge_id=$task[0]->challenge_id;
             $challenge_id=Challenge::where('id',$challenge_id)->get()->first();
@@ -92,10 +93,24 @@ class AssignedTaskController extends Controller
         $competenceId=$request->competenceId;
         $userId=$request->userId;
 
-        return AssignedTask::where('id',$id)->update(['task_score' => $score,'completionTime' => $time]);
-  
+        if ($score==1){
+            $newCompetenceUsers=competence_user::create([
+                'user_id'=>$userId,
+                'competence_id'=>$competenceId,
+                'isSuccessful'=>true,
+            ]);
+        }else{
+             $newCompetenceUsers=competence_user::create([
+                'user_id'=>$userId,
+                'competence_id'=>$competenceId,
+                'isSuccessful'=>false,
+            ]);
+        }
 
-        
+        return AssignedTask::where('id',$id)->update(['task_score' => $score,'completionTime' => $time]);
+
+
+
     }
     /**
      * Remove the specified resource from storage.

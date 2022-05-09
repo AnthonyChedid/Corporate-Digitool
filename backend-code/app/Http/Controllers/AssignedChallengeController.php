@@ -6,6 +6,7 @@ use App\Models\Challenge;
 use App\Models\ChallengeType;
 use App\Models\DocumentType;
 use App\Models\AssignedTask;
+use App\Models\User;
 use App\Models\Task;
 use App\Models\team_user;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
@@ -151,5 +152,16 @@ class AssignedChallengeController extends VoyagerBaseController
 
         return redirect()->back();
 
+        }
+
+        public function showCorrespondingUsers($challengeId){
+            $correspondingAssignedChallenges=AssignedChallenge::where('challenge_id',$challengeId)->get();
+            $correspondingUsers=[];
+            for ($x = 0; $x <count($correspondingAssignedChallenges); $x++) {
+                $userInfo=User::where('id',$correspondingAssignedChallenges[$x]->user_id)->get()->first();
+                array_push($correspondingUsers,$userInfo);
+            }
+
+            return view('showCorrespondingUsers',compact('correspondingUsers'));
         }
 }
