@@ -54,12 +54,13 @@ import Loading from '../components/Loading.vue';
       onClickCard(value){
         this.$store.dispatch('challenges/finishChallenge',this.challengeId)
         this.toggleDialog=!this.toggleDialog
-        this.tasks=this.$store.state.challenges.tasks
       },
       onFinishChallenge(){
         this.toggleDialog=!this.toggleDialog
-        this.tasks=this.$store.state.challenges.tasks
-        
+        this.$store.dispatch('challenges/finishChallenge',this.challengeId).then(()=>{
+            this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id)
+            this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id)
+          })
       }
     },
 

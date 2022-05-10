@@ -40,12 +40,6 @@ export default {
         }
       },
   props:['name','type','description','buttonText','challenge_id','file','fileType'],
-  watch: {
-    challenge_id: function(newVal) { 
-        this.chall_id = newVal
-    }
-  },
-
   created() {
       if(this.fileType == "excel"){
         this.image="excel_img.jpg"
@@ -82,7 +76,7 @@ export default {
                 }
                 if(this.fileType == "word"){
                   
-                  a.href="application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file[0];
+                  a.href="application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file;
                   a.download="corporate_digitool.docx"
                 }               
                   a.click(); //Downloaded file

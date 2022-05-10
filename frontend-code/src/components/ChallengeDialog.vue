@@ -82,11 +82,7 @@
         },
 
         onFinishButton(){
-          this.$store.dispatch('challenges/finishChallenge',this.challenge_id).then(()=>{
-            this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id)
-            this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id)
-            this.$emit('finishedChallenge');
-          })
+          this.$emit('finishedChallenge');
         }
         
     },
