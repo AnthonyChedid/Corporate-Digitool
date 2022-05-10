@@ -29,6 +29,7 @@ class AssignedTaskController extends Controller
             $challenge_id=$task[0]->challenge_id;
             $challenge_id=Challenge::where('id',$challenge_id)->get()->first();
             $challenge_id->challenge_document = base64_encode($challenge_id->challenge_document);
+            $challenge_id->result_document = base64_encode($challenge_id->result_document);
             $challenge_type_id=$challenge_id->challenge_type_id;
             $challenge_type_id=ChallengeType::where('id',$challenge_type_id)->get()->first();
             $challenge_id->challenge_type_id=$challenge_type_id;
