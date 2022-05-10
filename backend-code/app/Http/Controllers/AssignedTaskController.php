@@ -26,10 +26,11 @@ class AssignedTaskController extends Controller
             $task=Task::where('id',$id)->get();
             $competence=Competence::where('id',$task[0]->competence_id)->get()->first();
             $task[0]->competence_id=$competence;
+            $task[0]->result_document = base64_encode($task[0]->result_document);
             $challenge_id=$task[0]->challenge_id;
             $challenge_id=Challenge::where('id',$challenge_id)->get()->first();
             $challenge_id->challenge_document = base64_encode($challenge_id->challenge_document);
-            $challenge_id->result_document = base64_encode($challenge_id->result_document);
+            
             $challenge_type_id=$challenge_id->challenge_type_id;
             $challenge_type_id=ChallengeType::where('id',$challenge_type_id)->get()->first();
             $challenge_id->challenge_type_id=$challenge_type_id;
@@ -44,8 +45,9 @@ class AssignedTaskController extends Controller
         $a=AssignedTask::where('assignedchallenge_id',$id)->get();
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->task_id;
-            $challenge=Task::where('id',$id)->get();
-            $a[$x]->task_id=$challenge;
+            $task=Task::where('id',$id)->get();
+            $task[0]->result_document = base64_encode($task[0]->result_document);
+            $a[$x]->task_id=$task;
         }
         for ($x = 0; $x <count($a); $x++) {
             $id=$a[$x]->task_id;

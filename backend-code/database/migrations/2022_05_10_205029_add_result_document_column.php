@@ -13,8 +13,8 @@ class AddResultDocumentColumn extends Migration
      */
     public function up()
     {
-        Schema::table('challenges', function (Blueprint $table) {
-            $table->binary('result_document');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->binary('result_document')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddResultDocumentColumn extends Migration
      */
     public function down()
     {
-        Schema::table('challenges', function (Blueprint $table) {
+        Schema::table('tasks', function (Blueprint $table) {
             //
         });
     }

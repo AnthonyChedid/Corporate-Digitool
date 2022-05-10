@@ -31,7 +31,7 @@ class AssignedChallengeController extends VoyagerBaseController
             $type=$challenge[0]->challenge_type_id;
             $type=ChallengeType::where('id',$type)->get()->first();
             $challenge[0]->challenge_document = base64_encode($challenge[0]->challenge_document);
-            $challenge[0]->result_document = base64_encode($challenge[0]->result_document);
+            
             $challenge[0]->challenge_type_id=$type;
             $doc_type=$challenge[0]->document_type_id;
             $doc_type=DocumentType::where('id',$doc_type)->get()->first();
@@ -57,7 +57,7 @@ class AssignedChallengeController extends VoyagerBaseController
             $type=$challenge[0]->challenge_type_id;
             $type=ChallengeType::where('id',$type)->get()->first();
             $challenge[0]->challenge_document = base64_encode($challenge[0]->challenge_document);
-            $challenge[0]->result_document = base64_encode($challenge[0]->result_document);
+            
             $challenge[0]->challenge_type_id=$type;
             $a[$x]->challenge_id=$challenge;
         }
@@ -83,7 +83,7 @@ class AssignedChallengeController extends VoyagerBaseController
             $type=$challenge[0]->challenge_type_id;
             $type=ChallengeType::where('id',$type)->get()->first();
             $challenge[0]->challenge_document = base64_encode($challenge[0]->challenge_document);
-            $challenge[0]->result_document = base64_encode($challenge[0]->result_document);
+            
             $challenge[0]->challenge_type_id=$type;
             $a[$x]->challenge_id=$challenge;
         }
