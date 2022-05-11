@@ -14,13 +14,6 @@
         <input type="file" id="input_dom_element" label="File input" :disabled="formDisabled"
           v-if="!research" @change="previewFiles">
         <br/><br/><br/>
-        <!-- <v-file-input
-          accept="*"
-          label="File input"
-          :disabled="formDisabled"
-          v-if="!research"
-          v-model="files"
-        ></v-file-input> -->
           <v-btn
             depressed
             color="primary"
@@ -93,7 +86,7 @@ export default {
 
       }
     },
-    props:['description','correctAnswer','id','challengeType','taskName','competenceId','resultDocument'],
+    props:['description','correctAnswer','id','challengeType','taskName','competenceId','resultDocument','adr'],
     created() {
       this.currTime=new Date();
       if(this.challengeType=="Creation"){
@@ -250,6 +243,7 @@ export default {
 
 
         }
+        this.$emit('clicked');
       },
     },
 

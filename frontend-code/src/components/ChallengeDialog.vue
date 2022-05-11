@@ -20,7 +20,15 @@
             <v-icon>mdi-close</v-icon>
           </v-btn> -->
           <v-tabs v-model="tab">
-            <v-tab v-for="task in this.$store.state.challenges.tasks" :key="task.id">{{task.task_id[0].taskName}}</v-tab>
+            <v-tab 
+              v-for="(task,key) in this.$store.state.challenges.tasks"
+              :key="key"
+              :disabled="key != currentTabIndex"
+              >
+              {{task.task_id[0].taskName}}
+              
+              
+            </v-tab>
           </v-tabs>
             
           <v-spacer></v-spacer>
@@ -42,7 +50,8 @@
             <v-list-item-content>
              <v-tabs-items v-model="tab">
                 <task-card
-                  v-for="task in this.$store.state.challenges.tasks"
+                  @clicked="goToNextTab()"
+                  v-for="(task) in this.$store.state.challenges.tasks"
                   :key="task.id"
                   :description="task.task_id[0].description"
                   :id="task.id"
@@ -75,6 +84,7 @@
         notifications: false,
         sound: true,
         widgets: false,
+        currentTabIndex:0
       }
     },
     methods:{
@@ -84,7 +94,12 @@
 
         onFinishButton(){
           this.$emit('finishedChallenge');
-        }
+        },
+
+        goToNextTab(){
+          ++this.currentTabIndex
+        },
+        
         
     },
       

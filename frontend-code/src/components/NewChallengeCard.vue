@@ -71,12 +71,12 @@ export default {
                 }
                 if(this.fileType == "powerpoint"){
                   
-                  a.href="application/vnd.openxmlformats-officedocument.presentationml.presentation;base64,"+this.file;
+                  a.href="data:application/vnd.openxmlformats-officedocument.presentationml.presentation;base64,"+this.file;
                   a.download="corporate_digitool.pptx"
                 }
                 if(this.fileType == "word"){
                   
-                  a.href="application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file;
+                  a.href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,"+this.file;
                   a.download="corporate_digitool.docx"
                 }               
                   a.click(); //Downloaded file
