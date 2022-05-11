@@ -10,9 +10,9 @@
       <new-challenge-card :fileType="challenge.challenge_id[0].document_type_id.typeName" :file="challenge.challenge_id[0].challenge_document" :challenge_id="challenge.id" @clicked="challengeId=challenge.id;onClickCard();" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].challenge_type_id.typeName" description="a descriptuon" buttonText="Start Challenge" >
       </new-challenge-card>
       <br/>
-      <challenge-dialog :tabIndex="0" :challenge_id="challenge.id" @finishedChallenge="onFinishChallenge()" @clicked="onClickCard()" :dialog="toggleDialog" />
     </v-col>
     </v-row>
+    <challenge-dialog :challenge_id="challengeId" @finishedChallenge="onFinishChallenge()" @clicked="onClickCard()" :dialog="toggleDialog" />
     </v-container>
     
     <sidebar message="My Challenges" />
@@ -58,9 +58,9 @@ import Loading from '../components/Loading.vue';
       onFinishChallenge(){
         this.toggleDialog=!this.toggleDialog
         this.$store.dispatch('challenges/finishChallenge',this.challengeId).then(()=>{
-            this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id)
-            this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id)
-          })
+            this.$store.dispatch('challenges/getNewChallenges', JSON.parse(localStorage.getItem('user')).id).catch((err)=>{console.log("hon sar chi")})
+            this.$store.dispatch('challenges/getPreviousChallenges', JSON.parse(localStorage.getItem('user')).id).catch((err)=>{console.log("honik sar chi")})
+          }).catch((err)=>{console.log(err)})
       }
     },
 

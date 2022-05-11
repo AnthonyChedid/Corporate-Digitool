@@ -37,8 +37,6 @@
     color="#6A76AB"
     dark
     src="https://picsum.photos/1920/1080?random"
-    fade-img-on-scroll
-    scroll-target="#scrolling-techniques-1"
     app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 

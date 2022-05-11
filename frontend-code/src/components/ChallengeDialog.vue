@@ -5,9 +5,10 @@
       fullscreen
       hide-overlay
       transition="dialog-bottom-transition"
+      
     >
       
-      <v-card>
+      <v-card v-observe-visibility="visibilityChanged">
         <v-toolbar
           dark
           color="primary"
@@ -84,6 +85,7 @@
         notifications: false,
         sound: true,
         widgets: false,
+        tabIndex:0,
       }
     },
     methods:{
@@ -93,17 +95,23 @@
 
         onFinishButton(){
           this.$emit('finishedChallenge');
+          console.log("kholsit el emit")
         },
 
-        goToNextTab(){
-          ++this.tabIndex
-        },
         
+        visibilityChanged (isVisible, entry) {
+          if(isVisible==true){
+            this.tabIndex=0
+          }
+      },
+      goToNextTab(){
+        ++this.tabIndex
+      }
         
     },
       
 
-    props:['dialog','challenge_id','tasks','tabIndex'],
+    props:['dialog','challenge_id','tasks'],
 
     components:{
       TaskCard,

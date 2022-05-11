@@ -240,10 +240,8 @@ export default {
                   this.formDisabled=true
                   this.showSnack=true})                
               })
-
-
         }
-        this.$emit('clicked');
+        this.$emit('clicked')
       },
     },
 
