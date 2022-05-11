@@ -158,7 +158,7 @@ class AssignedChallengeController extends VoyagerBaseController
         }
 
         public function showCorrespondingUsers($challengeId){
-            $correspondingAssignedChallenges=AssignedChallenge::where('challenge_id',$challengeId)->get();
+            $correspondingAssignedChallenges=AssignedChallenge::where('challenge_id',$challengeId)->where('isFinished',false)->get();
             $correspondingUsers=[];
             for ($x = 0; $x <count($correspondingAssignedChallenges); $x++) {
                 $userInfo=User::where('id',$correspondingAssignedChallenges[$x]->user_id)->get()->first();

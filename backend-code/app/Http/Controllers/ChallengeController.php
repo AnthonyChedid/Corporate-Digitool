@@ -20,6 +20,7 @@ use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use App\Models\User;
 use App\Models\Team;
+use App\Models\Task;
 
 class ChallengeController extends VoyagerBaseController
 {
@@ -197,4 +198,13 @@ class ChallengeController extends VoyagerBaseController
                 'teams'
             ));
         }
+
+    public function destroy(Request $request, $id){
+        $correspondingTasks=Task::where('challenge_id',$id)->get();
+        for ($x = 0; $x <count($correspondingTasks); $x++) {
+            Task::destroy($correspondingTasks[$x]->id);
+        }
+        return parent::destroy($request, $id);
+    }
+
 }
