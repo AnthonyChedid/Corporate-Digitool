@@ -23,7 +23,7 @@
             <v-tab 
               v-for="(task,key) in this.$store.state.challenges.tasks"
               :key="key"
-              :disabled="key != currentTabIndex"
+              :disabled="key != tabIndex"
               >
               {{task.task_id[0].taskName}}
               
@@ -84,7 +84,6 @@
         notifications: false,
         sound: true,
         widgets: false,
-        currentTabIndex:0
       }
     },
     methods:{
@@ -97,14 +96,14 @@
         },
 
         goToNextTab(){
-          ++this.currentTabIndex
+          ++this.tabIndex
         },
         
         
     },
       
 
-    props:['dialog','challenge_id','tasks'],
+    props:['dialog','challenge_id','tasks','tabIndex'],
 
     components:{
       TaskCard,

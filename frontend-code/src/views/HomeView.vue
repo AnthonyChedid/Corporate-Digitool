@@ -10,7 +10,7 @@
       <new-challenge-card :fileType="challenge.challenge_id[0].document_type_id.typeName" :file="challenge.challenge_id[0].challenge_document" :challenge_id="challenge.id" @clicked="challengeId=challenge.id;onClickCard();" :name="challenge.challenge_id[0].name" :type="challenge.challenge_id[0].challenge_type_id.typeName" description="a descriptuon" buttonText="Start Challenge" >
       </new-challenge-card>
       <br/>
-      <challenge-dialog :challenge_id="challenge.id" @finishedChallenge="onFinishChallenge()" @clicked="onClickCard()" :dialog="toggleDialog" />
+      <challenge-dialog :tabIndex="0" :challenge_id="challenge.id" @finishedChallenge="onFinishChallenge()" @clicked="onClickCard()" :dialog="toggleDialog" />
     </v-col>
     </v-row>
     </v-container>
