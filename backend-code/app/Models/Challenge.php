@@ -10,6 +10,8 @@ class Challenge extends Model
 {
     use HasFactory;
 
+    protected $fillable=['name','challenge_type_id','document_type_id'];
+
     public function challenge_type(){
         return $this->belongsTo(ChallengeType::class,'challenge_type_id');
     }

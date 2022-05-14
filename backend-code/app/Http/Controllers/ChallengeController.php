@@ -19,9 +19,12 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 use App\Models\User;
+use App\Models\Challenge;
 use App\Models\Team;
 use App\Models\Task;
 use App\Models\AssignedChallenge;
+use App\Models\DocumentType;
+use App\Models\ChallengeType;
 
 class ChallengeController extends VoyagerBaseController
 {
@@ -230,5 +233,63 @@ class ChallengeController extends VoyagerBaseController
         }
         return parent::destroy($request, $id);
     }
+
+  public function create(Request $request)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        $this->authorize('add', app($dataType->model_name));
+
+        $dataTypeContent = (strlen($dataType->model_name) != 0)
+                            ? new $dataType->model_name()
+                            : false;
+
+        foreach ($dataType->addRows as $key => $row) {
+            $dataType->addRows[$key]['col_width'] = $row->details->width ?? 100;
+        }
+
+        // If a column has a relationship associated with it, we do not want to show that field
+        $this->removeRelationshipField($dataType, 'add');
+
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        // Eagerload Relations
+        $this->eagerLoadRelations($dataTypeContent, $dataType, 'add', $isModelTranslatable);
+
+        $view = 'voyager::bread.edit-add';
+
+        if (view()->exists("voyager::$slug.edit-add")) {
+            $view = "voyager::$slug.edit-add";
+        }
+        $documentTypes=DocumentType::get();
+        $challengeTypes=ChallengeType::get();
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable','documentTypes','challengeTypes'));
+    }
+
+    public function submitChallenge(Request $request){
+            $base64=null;
+            if($request->hasFile('challenge_document')){
+                 $path = $request->file('challenge_document')->getRealPath();
+                 $content = file_get_contents($path);
+                 $base64 = base64_encode($content);
+            }
+            $newChallenge=Challenge::create([
+                'name'=>$request->challenge_name,
+                'challenge_type_id'=>$request->challenge_type_id,
+                'document_type_id'=>$request->document_type_id,
+
+            ]);
+            Challenge::where('id',$newChallenge->id)->update(['challenge_document'=>$base64]);
+
+            return redirect()->route('tasks.showTasks', [$newChallenge->id]);
+
+    }
+
+
 
 }
