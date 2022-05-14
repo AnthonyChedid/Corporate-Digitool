@@ -17,10 +17,8 @@ services:
       - ./:/var/www/html/
       - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
-      - app-network
-  
+      - app-network 
 #MySQL Service
-
   db:
     image: mysql:5.7.22
     container_name: db

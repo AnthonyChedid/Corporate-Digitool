@@ -95,7 +95,6 @@
 
         onFinishButton(){
           this.$emit('finishedChallenge');
-          console.log("kholsit el emit")
         },
 
         
