@@ -61,6 +61,7 @@ export default {
                // a.href = "data:image/png;base64," + this.file; //Image Base64 Goes here
                if(this.type == "Research"){
                 if(this.fileType == "excel"){
+                  console.log(this.file)
                     a.href = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + this.file;
                     a.download = "corporate_digitool.xlsx"; //File name Here
                 }
