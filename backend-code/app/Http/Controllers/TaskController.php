@@ -35,9 +35,9 @@ class TaskController extends VoyagerBaseController
         {
             $challenge_id=$challengeId;
             $challenge=Challenge::where('id',$challenge_id)->get()->first();
-            $challengeTypeId=$challenge->challenge_type_id;
+            $challengeTypeName=$challenge->typeName;
             $competences=Competence::all();
-            return view('addTask',compact('challenge_id','competences','challengeTypeId'));
+            return view('addTask',compact('challenge_id','competences','challengeTypeName'));
         }
 
         public function submitTaskToChallenge(Request $request,$challengeId)

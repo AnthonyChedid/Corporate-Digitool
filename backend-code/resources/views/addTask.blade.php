@@ -28,14 +28,14 @@
                        {{Form::text('description')}}
 
                    </div>
-                    @if($challengeTypeId==2)
+                    @if($challengeTypeId=="Creation")
                    <div class="form-group">
                        {{Form::label('result_document','Result Document')}}
                        {{Form::file('result_document')}}
                    </div>
                    @endif
 
-                  @if($challengeTypeId==1)
+                  @if($challengeTypeName=='Research')
                    <div class="form-group">
                       {{Form::label('result','Result')}}
                       {{Form::text('result')}}
