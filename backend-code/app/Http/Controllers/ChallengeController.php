@@ -21,6 +21,7 @@ use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 use App\Models\User;
 use App\Models\Team;
 use App\Models\Task;
+use App\Models\AssignedChallenge;
 
 class ChallengeController extends VoyagerBaseController
 {
@@ -178,6 +179,27 @@ class ChallengeController extends VoyagerBaseController
             $users=User::where('role_id',2)->get();
             $teams=Team::all();
 
+
+            $bestScores=array();
+            $bestTimes=array();
+            for ($x = 0; $x <count($dataTypeContent); $x++) {
+                  $assignedChallenges=AssignedChallenge::where('challenge_id',$dataTypeContent[$x]->id)->get();
+                  $bestTime=0;
+                  $bestScore=0;
+                  for ($y = 0; $y <count($assignedChallenges); $y++) {
+                        if($assignedChallenges[$y]->totalTime > $bestTime){
+                            $bestTime=$assignedChallenges[$y]->totalTime;
+                        }
+                        if($assignedChallenges[$y]->score > $bestScore){
+                            $bestScore=$assignedChallenges[$y]->score;
+                        }
+                  }
+                  $bestScores[$dataTypeContent[$x]->name]=$bestScore;
+                  $bestTimes[$dataTypeContent[$x]->name]=$bestTime;
+
+            }
+
+
             return Voyager::view($view, compact(
                 'actions',
                 'dataType',
@@ -195,7 +217,9 @@ class ChallengeController extends VoyagerBaseController
                 'showSoftDeleted',
                 'showCheckboxColumn',
                 'users',
-                'teams'
+                'teams',
+                'bestScores',
+                'bestTimes'
             ));
         }
 

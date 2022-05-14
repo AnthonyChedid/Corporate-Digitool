@@ -135,6 +135,8 @@
                                             @endif
                                         </th>
                                         @endforeach
+                                        <th>Best Time</th>
+                                        <th>Best Score</th>
                                         <th class="actions text-right dt-not-orderable">{{ __('voyager::generic.actions') }}</th>
                                     </tr>
                                 </thead>
@@ -284,6 +286,8 @@
                                                 @endif
                                             </td>
                                         @endforeach
+                                            <td>{{$bestTimes[$data->name]}} seconds</td>
+                                            <td>{{$bestScores[$data->name]}}</td>
                                         <td class="no-sort no-click bread-actions">
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))

@@ -15,4 +15,8 @@ class Task extends Model
             'description',
             'result',
     ];
+
+    public function competences(){
+        return $this->belongsTo(ChallengeType::class,'competence_id');
+    }
 }
