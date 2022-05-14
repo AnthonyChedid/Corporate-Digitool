@@ -27,18 +27,30 @@ class CompetenceUserController extends VoyagerBaseController
         $unsuccessfulCompetences=competence_user::where('user_id',$userId)->where('isSuccessful',false)->get();
 
         //get infos of Successful Competences
-        $infoOfSuccessfulCompetences=[];
+        $infoOfSuccessfulCompetences=array();
         for ($x = 0; $x <count($successfulCompetences); $x++) {
             $infos=Competence::where('id',$successfulCompetences[$x]->competence_id)->get()->first();
-            array_push($infoOfSuccessfulCompetences,$infos);
+            $competenceName=$infos->competenceName;
+            if(!array_key_exists($competenceName,$infoOfSuccessfulCompetences)){
+                $infoOfSuccessfulCompetences[$competenceName]=1;
+            }
+            else{
+                $infoOfSuccessfulCompetences[$competenceName]+=1;
+            }
         }
 
         //get infos of Unsuccessful Competences
-        $infoOfUnsuccessfulCompetences=[];
-        for ($x = 0; $x <count($unsuccessfulCompetences); $x++) {
-            $infos=Competence::where('id',$unsuccessfulCompetences[$x]->competence_id)->get()->first();
-            array_push($infoOfUnsuccessfulCompetences,$infos);
-        }
+       $infoOfUnsuccessfulCompetences=array();
+       for ($x = 0; $x <count($unsuccessfulCompetences); $x++) {
+           $infos=Competence::where('id',$unsuccessfulCompetences[$x]->competence_id)->get()->first();
+           $competenceName=$infos->competenceName;
+           if(!array_key_exists($competenceName,$infoOfUnsuccessfulCompetences)){
+               $infoOfUnsuccessfulCompetences[$competenceName]=1;
+           }
+           else{
+               $infoOfUnsuccessfulCompetences[$competenceName]+=1;
+           }
+       }
 
         return view('showCorrespondingCompetences',compact('infoOfSuccessfulCompetences','infoOfUnsuccessfulCompetences'));
     }

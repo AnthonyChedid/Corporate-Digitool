@@ -27,13 +27,14 @@
                                 <tbody>
                                     <tr>
                                          <td>
-                                            @foreach($infoOfSuccessfulCompetences as $successful)
-                                                {{$successful->competenceName}}
+
+                                            @foreach($infoOfSuccessfulCompetences as $successfulCompetenceName=>$nbOfSuccTimes)
+                                                <p>{{$successfulCompetenceName}} <i>{{$nbOfSuccTimes}} Tasks</i></p>
                                             @endforeach
                                          </td>
                                           <td>
-                                            @foreach($infoOfUnsuccessfulCompetences as $unsuccessful)
-                                                {{$unsuccessful->competenceName}}
+                                            @foreach($infoOfUnsuccessfulCompetences as $unsuccessfulCompetenceName=>$nbOfUnsuccTimes)
+                                                <p>{{$unsuccessfulCompetenceName}} <i>{{$nbOfUnsuccTimes}} Tasks</i> </p>
                                             @endforeach
                                          </td>
                                     </tr>

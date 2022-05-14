@@ -11,4 +11,10 @@ class Competence extends Model
     protected $fillable = [
         'competenceName',
     ];
+
+     public function getCompetenceNameAttribute(){
+            return $this->attributes['competenceName'];
+         }
+
+        public $additional_attributes = ['competence_name'];
 }
