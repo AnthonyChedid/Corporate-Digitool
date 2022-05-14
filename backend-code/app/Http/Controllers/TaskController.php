@@ -40,8 +40,7 @@ class TaskController extends VoyagerBaseController
             $challengeType=ChallengeType::where('id',$challengeTypeId)->get()->first();
             $challengeTypeName=$challengeType->typeName;
             $competences=Competence::all();
-            return $challengeTypeName;
-//             return view('addTask',compact('challenge_id','competences','challengeTypeName'));
+             return view('addTask',compact('challenge_id','competences','challengeTypeName'));
         }
 
         public function submitTaskToChallenge(Request $request,$challengeId)
@@ -58,15 +57,15 @@ class TaskController extends VoyagerBaseController
                  $base64 = base64_encode($content);
             }
 
-
             $newTask=Task::create([
                 'competence_id'=>$competence_id,
                 'challenge_id'=>$challenge_id,
                 'taskName'=>$taskName,
                 'description'=>$description,
                 'result'=>$result,
-                'result_document'=>$base64
+                
             ]);
+            Task::where('id',$newTask->id)->update(['result_document'=>$base64]);
 
             return redirect()->route('tasks.showTasks', [$challenge_id]);
 

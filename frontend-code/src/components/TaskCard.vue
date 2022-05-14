@@ -176,6 +176,7 @@ export default {
                 var wb = XLSX.read(res2);
                 var uploaded = wb.Sheets.Sheet1;
                 console.log(uploaded);
+                console.log(target);
                 if(Lodash.isEqual(uploaded,target)){
                   this.body={
                   id:this.id,
