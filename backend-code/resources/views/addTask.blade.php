@@ -28,7 +28,7 @@
                        {{Form::text('description')}}
 
                    </div>
-                    @if($challengeTypeId=="Creation")
+                    @if($challengeTypeName=="Creation")
                    <div class="form-group">
                        {{Form::label('result_document','Result Document')}}
                        {{Form::file('result_document')}}
