@@ -8,6 +8,7 @@ use App\Models\Competence;
 use App\Models\AssignedTask;
 use App\Models\AssignedChallenge;
 use App\Models\Challenge;
+use App\Models\ChallengeType;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 class TaskController extends VoyagerBaseController
 {
@@ -35,9 +36,12 @@ class TaskController extends VoyagerBaseController
         {
             $challenge_id=$challengeId;
             $challenge=Challenge::where('id',$challenge_id)->get()->first();
-            $challengeTypeName=$challenge->typeName;
+            $challengeTypeId=$challenge->challenge_type_id;
+            $challengeType=ChallengeType::where('id',$challengeTypeId)->get()->first();
+            $challengeTypeName=$challengeType->typeName;
             $competences=Competence::all();
-            return view('addTask',compact('challenge_id','competences','challengeTypeName'));
+            return $challengeTypeName;
+//             return view('addTask',compact('challenge_id','competences','challengeTypeName'));
         }
 
         public function submitTaskToChallenge(Request $request,$challengeId)
