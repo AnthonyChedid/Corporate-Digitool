@@ -3,6 +3,7 @@
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->getTranslatedAttribute('display_name_plural'))
 
 @section('page_header')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="container-fluid">
         <h1 class="page-title">
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
@@ -28,7 +29,7 @@
             @endif
         @endcan
 
-        <button id="add_team_member_button"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Add a team member</button>
+        <button id="add_team_member_button" style="background-color: #F6BE00; border: none;color: white;padding: 7px 15px;text-align: center;text-decoration: none;display: inline-block;border-radius: 4px; "><i class="fa fa-user"></i>  Add team member</button>
 
         @foreach($actions as $action)
             @if (method_exists($action, 'massAction'))

@@ -3,12 +3,13 @@
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->getTranslatedAttribute('display_name_plural'))
 
 @section('page_header')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="container-fluid">
         <h1 class="page-title">
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
         </h1>
         @can('add', app($dataType->model_name))
-          <button id='add_challenge' onClick="window.location='/admin/challenges/create'" method="post">Add New Challenge</button>
+          <button id='add_challenge' onClick="window.location='/admin/challenges/create'" method="post"style="background-color: #4CAF73; border: none;color: white;padding: 7px 15px;text-align: center;text-decoration: none;display: inline-block;border-radius: 4px; " class="btn"><i class="fa fa-plus"></i> Add New Challenge</button>
 
         @endcan
         @can('delete', app($dataType->model_name))
@@ -27,8 +28,6 @@
             @endif
         @endcan
 
-        <button id="assignChallenge"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Assign a challenge</button>
-        <button id="assignChallengeToTeam"style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; ">Assign a challenge to Team</button>
 
         @foreach($actions as $action)
             @if (method_exists($action, 'massAction'))
@@ -36,6 +35,11 @@
             @endif
         @endforeach
         @include('voyager::multilingual.language-selector')
+    </div>
+    <div style="padding-left:87px">
+        <button id="assignChallenge"style="background-color: #19b5fe; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block;border-radius:4px"><i class="fa fa-reorder"></i>  Assign to user</button>
+        <button id="assignChallengeToTeam" style="background-color: #19b5fe; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block;border-radius:4px"><i class="fa fa-reorder"></i>  Assign to Team</button>
+
     </div>
 @stop
 
@@ -285,16 +289,18 @@
                                                 @endif
                                             </td>
                                         @endforeach
-                                            <td>{{$bestTimes[$data->name]}} seconds</td>
-                                            <td>{{$bestScores[$data->name]}}</td>
+                                            <td>@if($bestTimes[$data->name]!=0){{$bestTimes[$data->name]}} seconds @endif</td>
+                                            <td>@if($bestScores[$data->name]!=0){{$bestScores[$data->name]}} @endif</td>
                                         <td class="no-sort no-click bread-actions">
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
-                                            <button onclick="window.location='/admin/tasks/view/{{ $data->getKey() }}'"  style="background-color: #4CAF50; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block; " id='taskButton'>View Task</button>
-                                            <button onclick="window.location='/admin/users/view/{{ $data->getKey() }}'"  id='usersButton'>Users</button>
+                                            </td>
+                                            <td>
+                                            <button onclick="window.location='/admin/tasks/view/{{ $data->getKey() }}'"  style="background-color: #4CAF50; border: none;color: white;padding: 4px 9px;text-align: center;text-decoration: none;display: inline-block;border-radius:4px; margin-bottom:3px" id='taskButton'><i class="fa fa-list"></i>  Tasks</button>
+                                            <button onclick="window.location='/admin/users/view/{{ $data->getKey() }}'"  id='usersButton' style="background-color: #F6BE00; border: none;color: white;padding: 4px 9px;text-align: center;text-decoration: none;display: inline-block;border-radius:4px; "><i class="fa fa-user"></i>Users</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -381,9 +387,15 @@
 @stop
 
 @section('css')
+$('#assignChallenge'){
+
+}
 @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
     <link rel="stylesheet" href="{{ voyager_asset('lib/css/responsive.dataTables.min.css') }}">
 @endif
+
+
+
 @stop
 
 @section('javascript')

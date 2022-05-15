@@ -253,7 +253,7 @@
                                         @endforeach
                                         <td>
                                         @if($data->role_id==2)
-                                            <button onclick="window.location='/admin/competences/view/{{ $data->getKey() }}'"  id='competenceButton'>View</button>
+                                            <button onclick="window.location='/admin/competences/view/{{ $data->getKey() }}'"  id='competenceButton' style="background-color: #19b5fe; border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;display: inline-block;border-radius:4px"><i class="fa fa-reorder"></i>View</button>
                                         @endif
                                         </td>
                                         <td class="no-sort no-click bread-actions">
