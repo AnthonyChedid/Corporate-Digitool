@@ -3,69 +3,276 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use TCG\Voyager\Models\DataType;
 
 class DataTypesTableSeeder extends Seeder
 {
+
     /**
-     * Auto generated seed file.
+     * Auto generated seed file
+     *
+     * @return void
      */
     public function run()
     {
-        $dataType = $this->dataType('slug', 'users');
-        if (!$dataType->exists) {
-            $dataType->fill([
-                'name'                  => 'users',
-                'display_name_singular' => __('voyager::seeders.data_types.user.singular'),
-                'display_name_plural'   => __('voyager::seeders.data_types.user.plural'),
-                'icon'                  => 'voyager-person',
-                'model_name'            => 'TCG\\Voyager\\Models\\User',
-                'policy_name'           => 'TCG\\Voyager\\Policies\\UserPolicy',
-                'controller'            => 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController',
-                'generate_permissions'  => 1,
-                'description'           => '',
-            ])->save();
-        }
+        
 
-        $dataType = $this->dataType('slug', 'menus');
-        if (!$dataType->exists) {
-            $dataType->fill([
-                'name'                  => 'menus',
-                'display_name_singular' => __('voyager::seeders.data_types.menu.singular'),
-                'display_name_plural'   => __('voyager::seeders.data_types.menu.plural'),
-                'icon'                  => 'voyager-list',
-                'model_name'            => 'TCG\\Voyager\\Models\\Menu',
-                'controller'            => '',
-                'generate_permissions'  => 1,
-                'description'           => '',
-            ])->save();
-        }
-
-        $dataType = $this->dataType('slug', 'roles');
-        if (!$dataType->exists) {
-            $dataType->fill([
-                'name'                  => 'roles',
-                'display_name_singular' => __('voyager::seeders.data_types.role.singular'),
-                'display_name_plural'   => __('voyager::seeders.data_types.role.plural'),
-                'icon'                  => 'voyager-lock',
-                'model_name'            => 'TCG\\Voyager\\Models\\Role',
-                'controller'            => 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController',
-                'generate_permissions'  => 1,
-                'description'           => '',
-            ])->save();
-        }
-    }
-
-    /**
-     * [dataType description].
-     *
-     * @param [type] $field [description]
-     * @param [type] $for   [description]
-     *
-     * @return [type] [description]
-     */
-    protected function dataType($field, $for)
-    {
-        return DataType::firstOrNew([$field => $for]);
+        \DB::table('data_types')->delete();
+        
+        \DB::table('data_types')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'name' => 'users',
+                'slug' => 'users',
+                'display_name_singular' => 'User',
+                'display_name_plural' => 'Users',
+                'icon' => 'voyager-person',
+                'model_name' => 'TCG\\Voyager\\Models\\User',
+                'policy_name' => 'TCG\\Voyager\\Policies\\UserPolicy',
+                'controller' => 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
+                'created_at' => '2022-05-15 22:05:16',
+                'updated_at' => '2022-05-15 22:14:27',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => 'menus',
+                'slug' => 'menus',
+                'display_name_singular' => 'Menu',
+                'display_name_plural' => 'Menus',
+                'icon' => 'voyager-list',
+                'model_name' => 'TCG\\Voyager\\Models\\Menu',
+                'policy_name' => NULL,
+                'controller' => '',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2022-05-15 22:05:16',
+                'updated_at' => '2022-05-15 22:05:16',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'roles',
+                'slug' => 'roles',
+                'display_name_singular' => 'Role',
+                'display_name_plural' => 'Roles',
+                'icon' => 'voyager-lock',
+                'model_name' => 'TCG\\Voyager\\Models\\Role',
+                'policy_name' => NULL,
+                'controller' => 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2022-05-15 22:05:16',
+                'updated_at' => '2022-05-15 22:05:16',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => 'categories',
+                'slug' => 'categories',
+                'display_name_singular' => 'Category',
+                'display_name_plural' => 'Categories',
+                'icon' => 'voyager-categories',
+                'model_name' => 'TCG\\Voyager\\Models\\Category',
+                'policy_name' => NULL,
+                'controller' => '',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2022-05-15 22:05:16',
+                'updated_at' => '2022-05-15 22:05:16',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'posts',
+                'slug' => 'posts',
+                'display_name_singular' => 'Post',
+                'display_name_plural' => 'Posts',
+                'icon' => 'voyager-news',
+                'model_name' => 'TCG\\Voyager\\Models\\Post',
+                'policy_name' => 'TCG\\Voyager\\Policies\\PostPolicy',
+                'controller' => '',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2022-05-15 22:05:16',
+                'updated_at' => '2022-05-15 22:05:16',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'name' => 'pages',
+                'slug' => 'pages',
+                'display_name_singular' => 'Page',
+                'display_name_plural' => 'Pages',
+                'icon' => 'voyager-file-text',
+                'model_name' => 'TCG\\Voyager\\Models\\Page',
+                'policy_name' => NULL,
+                'controller' => '',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2022-05-15 22:05:16',
+                'updated_at' => '2022-05-15 22:05:16',
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'assigned_challenges',
+                'slug' => 'assigned-challenges',
+                'display_name_singular' => 'Assigned Challenge',
+                'display_name_plural' => 'Assigned Challenges',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\AssignedChallenge',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\AssignedChallengeController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2022-05-15 22:07:15',
+                'updated_at' => '2022-05-15 22:07:15',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'challenge_types',
+                'slug' => 'challenge-types',
+                'display_name_singular' => 'Challenge Type',
+                'display_name_plural' => 'Challenge Types',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\ChallengeType',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\ChallengeTypeController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2022-05-15 22:08:19',
+                'updated_at' => '2022-05-15 22:08:19',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'name' => 'challenges',
+                'slug' => 'challenges',
+                'display_name_singular' => 'Challenge',
+                'display_name_plural' => 'Challenges',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\Challenge',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\ChallengeController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2022-05-15 22:08:41',
+                'updated_at' => '2022-05-15 22:25:02',
+            ),
+            9 => 
+            array (
+                'id' => 13,
+                'name' => 'competence_users',
+                'slug' => 'competence-users',
+                'display_name_singular' => 'Competence User',
+                'display_name_plural' => 'Competence Users',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\competence_user',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\CompetenceUserController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2022-05-15 22:11:44',
+                'updated_at' => '2022-05-15 22:11:44',
+            ),
+            10 => 
+            array (
+                'id' => 14,
+                'name' => 'competences',
+                'slug' => 'competences',
+                'display_name_singular' => 'Competence',
+                'display_name_plural' => 'Competences',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\Competence',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\CompetenceController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2022-05-15 22:12:09',
+                'updated_at' => '2022-05-15 22:12:09',
+            ),
+            11 => 
+            array (
+                'id' => 15,
+                'name' => 'document_types',
+                'slug' => 'document-types',
+                'display_name_singular' => 'Document Type',
+                'display_name_plural' => 'Document Types',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\DocumentType',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\DocumentTypeController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2022-05-15 22:12:30',
+                'updated_at' => '2022-05-15 22:12:30',
+            ),
+            12 => 
+            array (
+                'id' => 16,
+                'name' => 'tasks',
+                'slug' => 'tasks',
+                'display_name_singular' => 'Task',
+                'display_name_plural' => 'Tasks',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\Task',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\TaskController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2022-05-15 22:12:56',
+                'updated_at' => '2022-05-15 22:13:27',
+            ),
+            13 => 
+            array (
+                'id' => 17,
+                'name' => 'teams',
+                'slug' => 'teams',
+                'display_name_singular' => 'Team',
+                'display_name_plural' => 'Teams',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\Team',
+                'policy_name' => NULL,
+                'controller' => 'App\\Http\\Controllers\\TeamController',
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2022-05-15 22:13:45',
+                'updated_at' => '2022-05-15 22:13:45',
+            ),
+        ));
+        
+        
     }
 }
