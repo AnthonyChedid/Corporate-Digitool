@@ -121,6 +121,7 @@
                                             </th>
                                         @endif
                                         @foreach($dataType->browseRows as $row)
+                                        @if($row->field!="challenge_document")
                                         <th>
                                             @if ($isServerSide && in_array($row->field, $sortableColumns))
                                                 <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
@@ -137,6 +138,7 @@
                                                 </a>
                                             @endif
                                         </th>
+                                        @endif
                                         @endforeach
                                         <th>Best Time</th>
                                         <th>Best Score</th>
@@ -152,6 +154,7 @@
                                             </td>
                                         @endif
                                         @foreach($dataType->browseRows as $row)
+                                        @if($row->field!="challenge_document")
                                             @php
                                             if ($data->{$row->field.'_browse'}) {
                                                 $data->{$row->field} = $data->{$row->field.'_browse'};
@@ -276,7 +279,7 @@
                                                         {{ trans_choice('voyager::media.files', 0) }}
                                                     @elseif ($data->{$row->field} != '')
                                                         @if (property_exists($row->details, 'show_as_images') && $row->details->show_as_images)
-                                                            <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:50px">
+                                                            <img srccr="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:50px">
                                                         @else
                                                             {{ $data->{$row->field} }}
                                                         @endif
@@ -288,6 +291,7 @@
                                                     <span>{{ $data->{$row->field} }}</span>
                                                 @endif
                                             </td>
+                                        @endif
                                         @endforeach
                                             <td>@if($bestTimes[$data->name]!=0){{$bestTimes[$data->name]}} seconds @endif</td>
                                             <td>@if($bestScores[$data->name]!=0){{$bestScores[$data->name]}} @endif</td>

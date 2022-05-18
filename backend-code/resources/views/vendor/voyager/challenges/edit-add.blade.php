@@ -32,7 +32,7 @@
                       {{Form::select('document_type_id',$documentTypes->pluck('typeName','id'))}}
                    </div>
                    <div class="form-group">
-                      {{Form::label('challenge_type','Challenge Document')}}
+                      {{Form::label('challenge_type','Challenge Type')}}
                      {{Form::select('challenge_type_id',$challengeTypes->pluck('typeName','id'))}}
                    </div>
                    <div>
